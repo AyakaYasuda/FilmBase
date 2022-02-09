@@ -1,0 +1,33 @@
+.header {
+  color: white;
+  display: flex;
+  padding: 2rem 4rem 0.5rem;
+  background-color: #101e49;
+  position: relative;
+  z-index: 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  font-size: 1.3rem;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.menu li {
+  padding: 1rem 0.5rem 0.8rem;
+  margin: 0 1rem;
+}
+
+.menu li:hover {
+  border-bottom: 2px solid #ef697d;
+}

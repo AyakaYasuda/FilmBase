@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MovieItem from "./MovieItem";
+import ListHeader from "../Layout/ListHeader";
 import classes from "./MoviesList.module.css";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -63,9 +64,8 @@ const MoviesList = () => {
 
   return (
     <section className={classes.movieslist}>
-      <div className={classes.container}>
-        {moviesList}
-      </div>
+      <ListHeader />
+      <div className={classes.container}>{moviesList}</div>
     </section>
   );
 };
