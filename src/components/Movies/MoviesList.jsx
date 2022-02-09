@@ -62,8 +62,10 @@ const MoviesList = () => {
   ));
 
   return (
-    <section className={classes.container}>
-      {moviesList}
+    <section className={classes.movieslist}>
+      <div className={classes.container}>
+        {moviesList}
+      </div>
     </section>
   );
 };

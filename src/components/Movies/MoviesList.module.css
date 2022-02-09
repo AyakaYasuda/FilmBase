@@ -1,7 +1,9 @@
-.container {
+.movieslist {
   width: 95%;
-  height: auto;
   margin: 0 auto;
+}
+
+.container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

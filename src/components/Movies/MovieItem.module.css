@@ -7,6 +7,7 @@
   z-index: 0;
   overflow: hidden;
   position: relative;
+  border-radius: 10px;
 }
 
 .movie:hover .overlay {
@@ -20,13 +21,13 @@
   position: absolute;
   z-index: 20;
   bottom: -100%;
-  background-color: black;
+  background-color: #0d1737;
   opacity: 0.8;
   transition: bottom 0.7s;
 }
 
 .title {
-  color: white;
+  color: #3ec9a6;
   font-size: 2.2rem;
   font-wight: 600;
   margin-bottom: 2rem;
@@ -39,7 +40,7 @@
 }
 
 .date {
-  color: white;
+  color: #ffe251;
   font-size: 1.2rem;
 }
 
