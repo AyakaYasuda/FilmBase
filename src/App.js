@@ -1,9 +1,9 @@
-import FilmList from './components/Films/FilmList';
+import MoviesList from "./components/Movies/MoviesList";
 
 const App = () => {
   return (
     <div>
-      <FilmList />
+      <MoviesList />
     </div>
   );
 };
