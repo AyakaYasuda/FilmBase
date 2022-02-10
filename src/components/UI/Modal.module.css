@@ -13,7 +13,7 @@
   top: 15vh;
   left: 10%;
   width: 80%;
-  height: 42.5rem;
+  min-height: 42.5rem;
   background-color: white;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
