@@ -11,6 +11,7 @@ const ListHeader = props => {
         <ul className={classes.menu}>
           <li>Popular</li>
           <li>Favorites</li>
+          <li>Watched</li>
         </ul>
       </header>
     </Fragment>

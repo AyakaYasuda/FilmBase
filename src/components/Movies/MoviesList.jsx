@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import MovieItem from "./MovieItem";
 import ListHeader from "../Layout/ListHeader";
+import MovieModal from "./MovieModal";
 import classes from "./MoviesList.module.css";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY);
 
 const MoviesList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [movies, setMovies] = useState([]);
+  const [modalIsShown, setModalIsShown] = useState(false);
+  const [movieId, setMovieId] = useState("");
+
+  const openModalHandler = id => {
+    setModalIsShown(true);
+    setMovieId(id);
+  };
+
+  const closeModalHandler = () => {
+    setModalIsShown(false);
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -59,13 +70,18 @@ const MoviesList = () => {
       overview={movie.overview}
       image={movie.poster_path}
       release_date={movie.release_date}
+      onOpenModal={openModalHandler}
     />
   ));
 
   return (
-    <section className={classes.movieslist}>
+    <section className={classes.movies_list}>
       <ListHeader />
+      {modalIsShown && (
+        <MovieModal movies={movies} movieId={movieId} onCloseModal={closeModalHandler} />
+      )}
       <div className={classes.container}>{moviesList}</div>
+      <div className={classes.spacer}></div>
     </section>
   );
 };

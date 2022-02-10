@@ -1,9 +1,13 @@
-.movieslist {
+.movies_list {
   margin: 0 auto;
 }
 
 .container {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.spacer {
+  padding: 10rem;
 }
