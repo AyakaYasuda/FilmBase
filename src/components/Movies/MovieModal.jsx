@@ -9,7 +9,6 @@ const MovieModal = props => {
     movie => movie.id === props.movieId
   );
   const selectedMovie = selectedMovieArray[0];
-  console.log(selectedMovie);
 
   const imageLargePath =
     "https://image.tmdb.org/t/p/w300" + selectedMovie.poster_path;
@@ -38,7 +37,7 @@ const MovieModal = props => {
           <div className={classes.boxes}>
             <p className={classes.rate}>{selectedMovie.vote_average} / 10</p>
             <div className={classes.buttons}>
-              <FavoriteButton />
+              <FavoriteButton selectedMovie={selectedMovie} />
               <WatchButton />
             </div>
           </div>

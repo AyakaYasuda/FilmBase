@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import MovieItem from "./MovieItem";
-import ListHeader from "../Layout/ListHeader";
-import MovieModal from "./MovieModal";
+import MovieItem from "../components/Movies/MovieItem";
+import ListHeader from "../components/Layout/ListHeader";
+import MovieModal from "../components/Movies/MovieModal";
 import classes from "./MoviesList.module.css";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -78,7 +78,11 @@ const MoviesList = () => {
     <section className={classes.movies_list}>
       <ListHeader />
       {modalIsShown && (
-        <MovieModal movies={movies} movieId={movieId} onCloseModal={closeModalHandler} />
+        <MovieModal
+          movies={movies}
+          movieId={movieId}
+          onCloseModal={closeModalHandler}
+        />
       )}
       <div className={classes.container}>{moviesList}</div>
       <div className={classes.spacer}></div>
