@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import classes from "./ListHeader.module.css";
 
 const ListHeader = props => {
@@ -10,7 +11,7 @@ const ListHeader = props => {
         </div>
         <ul className={classes.menu}>
           <li>Popular</li>
-          <li>Favorites</li>
+          <NavLink to="/favorites">Favorites</NavLink>
           <li>Watched</li>
         </ul>
       </header>
