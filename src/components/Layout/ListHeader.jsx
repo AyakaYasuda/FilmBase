@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./ListHeader.module.css";
 
-const ListHeader = props => {
+const ListHeader = () => {
   return (
     <Fragment>
       <header className={classes.header}>
@@ -10,9 +10,23 @@ const ListHeader = props => {
           <h1>Discover Films</h1>
         </div>
         <ul className={classes.menu}>
-          <li>Popular</li>
-          <NavLink to="/favorites">Favorites</NavLink>
-          <li>Watched</li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `${classes.link} ${isActive ? classes.active : ""}`
+            }
+          >
+            Popular
+          </NavLink>
+          <NavLink
+            to="/favorites"
+            className={({ isActive }) =>
+              `${classes.link} ${isActive ? classes.active : ""}`
+            }
+          >
+            Favorites
+          </NavLink>
+          <li className={classes.link}>Watched</li>
         </ul>
       </header>
     </Fragment>

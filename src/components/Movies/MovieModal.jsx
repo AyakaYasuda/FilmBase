@@ -10,6 +10,10 @@ const MovieModal = props => {
   );
   const selectedMovie = selectedMovieArray[0];
 
+  if (!selectedMovie) {
+    return <div></div>;
+  }
+
   const imageLargePath =
     "https://image.tmdb.org/t/p/w300" + selectedMovie.poster_path;
 
