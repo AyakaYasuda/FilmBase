@@ -1,28 +1,32 @@
 const initialState = {
+  isLoggedIn: false,
+  userId: null,
+  email: null,
+  token: null,
   favoriteMovieArray: [],
 };
 
-const ADD_FAV = "ADD_FAV";
-export const addFavoriteAction = selectedMovie => {
+const ADD_FAV = 'ADD_FAV';
+export const addFavoriteAction = (selectedMovie) => {
   return {
-    type: "ADD_FAV",
+    type: 'ADD_FAV',
     payload: {
       selectedMovie,
     },
   };
 };
 
-const REMOVE_FAV = "REMOVE_FAV";
-export const removeFavoriteAction = selectedMovieId => {
+const REMOVE_FAV = 'REMOVE_FAV';
+export const removeFavoriteAction = (selectedMovieId) => {
   return {
-    type: "REMOVE_FAV",
+    type: 'REMOVE_FAV',
     payload: {
       selectedMovieId,
     },
   };
 };
 
-export const reducer = (state = initialState, action) => {
+export const usersReducer = (state = initialState, action) => {
   console.log(state, action);
   switch (action.type) {
     case ADD_FAV:
@@ -37,7 +41,7 @@ export const reducer = (state = initialState, action) => {
       return {
         favoriteMovieArray: [
           ...updatedFavoriteMovieArray.filter(
-            movie => movie.id !== action.payload.selectedMovieId
+            (movie) => movie.id !== action.payload.selectedMovieId
           ),
         ],
       };

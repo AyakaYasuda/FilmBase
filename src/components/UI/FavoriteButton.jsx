@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavoriteAction, removeFavoriteAction } from "../../redux/reducers";
+import { addFavoriteAction, removeFavoriteAction } from "../../redux/usersReducers";
 
 const FavoriteButton = props => {
   const dispatch = useDispatch();
