@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import ListHeader from "../components/Layout/ListHeader";
-import MoviesList from "../components/Movies/MoviesList";
+import React, { useEffect, useState } from 'react';
+import MoviesList from '../components/Movies/MoviesList';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const PopularMovies = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const PopularMovies = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Something went wrong!");
+        throw new Error('Something went wrong!');
       }
 
       const responseData = await response.json();
@@ -28,7 +27,7 @@ const PopularMovies = () => {
       setIsLoading(false);
     };
 
-    fetchMovies().catch(error => {
+    fetchMovies().catch((error) => {
       setIsLoading(false);
       setError(error.message);
     });
@@ -50,12 +49,7 @@ const PopularMovies = () => {
     );
   }
 
-  return (
-    <div>
-      <ListHeader />
-      <MoviesList movies={movies} />
-    </div>
-  );
+  return <MoviesList movies={movies} />;
 };
 
 export default PopularMovies;

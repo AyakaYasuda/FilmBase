@@ -1,27 +1,27 @@
-import { Fragment } from "react";
-import { NavLink } from "react-router-dom";
-import classes from "./ListHeader.module.css";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import classes from './Header.module.css';
 
-const ListHeader = () => {
+const Header = () => {
   return (
-    <Fragment>
+    <>
       <header className={classes.header}>
         <div className={classes.title}>
           <h1>Discover Films</h1>
         </div>
         <ul className={classes.menu}>
           <NavLink
-            to="/"
+            to="/movies"
             className={({ isActive }) =>
-              `${classes.link} ${isActive ? classes.active : ""}`
+              `${classes.link} ${isActive ? classes.active : ''}`
             }
           >
             Popular
           </NavLink>
           <NavLink
-            to="/favorites"
+            to="/movies/favorites"
             className={({ isActive }) =>
-              `${classes.link} ${isActive ? classes.active : ""}`
+              `${classes.link} ${isActive ? classes.active : ''}`
             }
           >
             Favorites
@@ -29,8 +29,8 @@ const ListHeader = () => {
           <li className={classes.link}>Watched</li>
         </ul>
       </header>
-    </Fragment>
+    </>
   );
 };
 
-export default ListHeader;
+export default Header;
