@@ -1,37 +1,33 @@
-import React from 'react';
-import { Fragment } from 'react';
+import React, { useState } from 'react';
+import { useMutation } from 'react-query';
+import * as api from "../../services/users-api"
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+
 const FavoriteButton = (props) => {
-  // const dispatch = useDispatch();
-  // const favoriteMovieArray = useSelector(state => state.favoriteMovieArray);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  // const isFound = favoriteMovieArray.find(
-  //   movie => movie.id === props.selectedMovie.id
-  // );
-  // console.log(isFound);
+  const setFavoriteHandler = () => {
+    setIsFavorite(true);
+  };
 
-  // const addFavoriteHandler = () => {
-  //   dispatch(addFavoriteAction(props.selectedMovie));
-  // };
+  const unsetFavoriteHandler = () => {
+    setIsFavorite(false);
+  };
+  
 
-  // const removeFavoriteHandler = () => {
-  //   dispatch(removeFavoriteAction(props.selectedMovie.id));
-  // };
-
-  return (
-    <Fragment>
-      <FavoriteIcon
-        sx={{ color: '#ffe251', fontSize: 30 }}
-        // onClick={removeFavoriteHandler}
-      />
-
-      {/* <FavoriteBorderIcon
-          sx={{ color: "#ffe251", fontSize: 30 }}
-          // onClick={addFavoriteHandler}
-        /> */}
-    </Fragment>
+  return isFavorite ? (
+    <FavoriteIcon
+      sx={{ color: '#ffe251', fontSize: 30 }}
+      onClick={unsetFavoriteHandler}
+    />
+  ) : (
+    <FavoriteBorderIcon
+      sx={{ color: '#ffe251', fontSize: 30 }}
+      onClick={setFavoriteHandler}
+    />
   );
 };
 

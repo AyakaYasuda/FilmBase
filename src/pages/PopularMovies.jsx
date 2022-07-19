@@ -1,39 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import fetchPopularMovies from '../services/fetchPopularMovies';
+
 import MoviesList from '../components/Movies/MoviesList';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 const PopularMovies = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsLoading(true);
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
-      );
+  const { isLoading, isFetching, isError, error } = useQuery(
+    'movies',
+    fetchPopularMovies,
+    {
+      retry: false,
+      onSuccess: (data) => {
+        setMovies(data.results);
+      },
+    }
+  );
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-
-      const responseData = await response.json();
-      const loadedMovies = responseData.results;
-
-      console.log(loadedMovies);
-      setMovies(loadedMovies);
-      setIsLoading(false);
-    };
-
-    fetchMovies().catch((error) => {
-      setIsLoading(false);
-      setError(error.message);
-    });
-  }, []);
-
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div>
         <p>Loading...</p>
@@ -41,7 +26,7 @@ const PopularMovies = () => {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div>
         <p>{error}</p>

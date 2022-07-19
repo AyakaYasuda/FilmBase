@@ -32,3 +32,23 @@ export const getUserById = (id, token) => {
     })
     .then((res) => res.data.member);
 };
+
+export const addFavoriteMovie = (userId, movieId, token) => {
+  return api
+    .put(`/movie/add/${userId}`, movieId, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.data);
+};
+
+export const removeFavoriteMovie = (userId, movieId, token) => {
+  return api
+    .put(`/movie/remove/${userId}`, movieId, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.data);
+};
