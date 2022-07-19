@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import fetchPopularMovies from '../services/fetchPopularMovies';
 import * as api from '../services/movies-api';
 
 import MoviesList from '../components/Movies/MoviesList';
 
 const PopularMovies = () => {
-  const [movies, setMovies] = useState([]);
+  const queryClient = useQueryClient();
   const { token } = useSelector((state) => state.users);
 
   const { isLoading, isFetching, isError, error } = useQuery(
-    'movies',
+    'MOVIES',
     fetchPopularMovies,
     {
       retry: false,
-      onSuccess: (data) => {
-        setMovies(data.results);
-      },
+      staleTime: Infinity,
     }
   );
 
-  const { data: dbMovies } = useQuery('movies-db', api.getAllMovies);
-  
+  const { data } = useQuery(['DB_MOVIES'], api.getAllMovies, {
+    retry: false,
+    staleTime: Infinity,
+  });
+
   const moviesMutation = useMutation(api.createMovie);
+
+  const dbMovies = queryClient.getQueryData('DB_MOVIES');
+  const movies = queryClient.getQueryData('MOVIES')?.results;
 
   useEffect(() => {
     if (movies && token) {
@@ -36,7 +40,7 @@ const PopularMovies = () => {
           releaseDate: movie.release_date,
           vote: movie.vote_average,
         };
-        
+
         if (!dbMovies.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
           moviesMutation.mutate({ data: movieData, token });
         }
