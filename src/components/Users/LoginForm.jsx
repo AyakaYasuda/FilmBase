@@ -1,13 +1,40 @@
 import React from 'react';
+import { useMutation } from 'react-query';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as api from '../../services/users-api';
+import { login } from '../../redux/usersSlice';
 import classes from './LoginForm.module.css';
 
-const LoginForm = ({ register, handleSubmit, errors, submitHandler }) => {
+const LoginForm = ({ register, handleSubmit, errors, reset }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const loginMutation = useMutation(api.login, {
+    onSuccess: (data) => {
+      const { userId, token } = data;
+      dispatch(login({ userId, token }));
+
+      navigate('/movies');
+      reset();
+    },
+  });
+
+  const loginHandler = (data) => {
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+
+    loginMutation.mutate(userData);
+  };
+
   return (
     <>
       <h1>LOG IN</h1>
       <form
         className={classes['login-form']}
-        onSubmit={handleSubmit(submitHandler)}
+        onSubmit={handleSubmit(loginHandler)}
       >
         <input
           type="email"

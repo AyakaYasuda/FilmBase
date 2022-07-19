@@ -10,9 +10,6 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    signup: (state) => {
-      state.isLoggedIn = true;
-    },
     login: (state, action) => {
       const { userId, token } = action.payload;
       state.isLoggedIn = true;

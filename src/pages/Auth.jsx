@@ -42,31 +42,13 @@ const Auth = () => {
     setIsLoginMode(true);
   };
 
-  const signupHandler = (data) => {
-    const userState = {
-      email: data.email,
-      password: data.password,
-    };
-    // dispatch(signup(userState));
-    signupFormReset();
-  };
-
-  const loginHandler = (data) => {
-    const userState = {
-      email: data.email,
-      password: data.password,
-    };
-    // dispatch(login(userState));
-    loginFormReset();
-  };
-
   return isLoginMode ? (
     <>
       <LoginForm
         register={loginFormRegister}
         handleSubmit={loginFormHandleSubmit}
         errors={loginErrors}
-        submitHandler={loginHandler}
+        reset={loginFormReset}
       />
       <p onClick={switchToSignupModeHandler}>
         You don't have an account? SIGN UP
@@ -78,7 +60,8 @@ const Auth = () => {
         register={signupFromRegister}
         handleSubmit={signupFormHandleSubmit}
         errors={signupErrors}
-        submitHandler={signupHandler}
+        reset={signupFormReset}
+        setIsLoginMode={setIsLoginMode}
       />
       <p onClick={switchToLoginModeHandler}>
         You already have an account? LOG IN

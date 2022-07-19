@@ -1,22 +1,39 @@
 import React from 'react';
+import { useMutation } from 'react-query';
+import * as api from '../../services/users-api';
+
 import classes from './SignupForm.module.css';
 
-const SignupForm = ({ register, handleSubmit, errors, submitHandler }) => {
+const SignupForm = ({
+  register,
+  handleSubmit,
+  errors,
+  reset,
+  setIsLoginMode,
+}) => {
+  const signupMutation = useMutation(api.signup, {
+    onSuccess: () => {
+      reset();
+      setIsLoginMode(true);
+    },
+  });
+
+  const signupHandler = (data) => {
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+
+    signupMutation.mutate(userData);
+  };
+
   return (
     <>
       <h1>Sign Up</h1>
       <form
         className={classes['signup-form']}
-        onSubmit={handleSubmit(submitHandler)}
+        onSubmit={handleSubmit(signupHandler)}
       >
-        <input
-          type="text"
-          name="username"
-          placeholder="User Name"
-          className={classes['signup-input']}
-          {...register('username')}
-        />
-        <p className={classes['signup-error']}>{errors.username?.message}</p>
         <input
           type="email"
           name="email"
