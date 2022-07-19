@@ -1,11 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import ListHeader from "../components/Layout/ListHeader";
-import MoviesList from "../components/Movies/MoviesList";
-import classes from "./FavoriteMovies.module.css"
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+import MoviesList from '../components/Movies/MoviesList';
+import classes from './FavoriteMovies.module.css';
 
 const FavoriteMovies = () => {
-  const favoriteMovies = useSelector(state => state.favoriteMovieArray);
+  const favoriteMovies = useSelector((state) => state.favoriteMovieArray);
   console.log(favoriteMovies);
 
   let mainContent = <MoviesList movies={favoriteMovies} />;
@@ -17,12 +17,7 @@ const FavoriteMovies = () => {
     );
   }
 
-  return (
-    <div>
-      <ListHeader />
-      {mainContent}
-    </div>
-  );
+  return <div>{mainContent}</div>;
 };
 
 export default FavoriteMovies;
