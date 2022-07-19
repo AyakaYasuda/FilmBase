@@ -15,8 +15,21 @@ const LoginForm = ({ register, handleSubmit, errors, reset }) => {
       const { userId, token } = data;
       dispatch(login({ userId, token }));
 
-      navigate('/movies');
+      const tokenExpirationDate = new Date(
+        new Date().getTime() + 1000 * 60 * 60
+      );
+
+      localStorage.setItem(
+        'userData',
+        JSON.stringify({
+          uid: userId,
+          token: token,
+          expiration: tokenExpirationDate,
+        })
+      );
+
       reset();
+      navigate('/movies');
     },
   });
 

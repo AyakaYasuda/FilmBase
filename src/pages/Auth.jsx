@@ -42,31 +42,35 @@ const Auth = () => {
     setIsLoginMode(true);
   };
 
-  return isLoginMode ? (
-    <>
-      <LoginForm
-        register={loginFormRegister}
-        handleSubmit={loginFormHandleSubmit}
-        errors={loginErrors}
-        reset={loginFormReset}
-      />
-      <p onClick={switchToSignupModeHandler}>
-        You don't have an account? SIGN UP
-      </p>
-    </>
-  ) : (
-    <>
-      <SignupForm
-        register={signupFromRegister}
-        handleSubmit={signupFormHandleSubmit}
-        errors={signupErrors}
-        reset={signupFormReset}
-        setIsLoginMode={setIsLoginMode}
-      />
-      <p onClick={switchToLoginModeHandler}>
-        You already have an account? LOG IN
-      </p>
-    </>
+  return (
+    <div className="section-container">
+      {isLoginMode ? (
+        <>
+          <LoginForm
+            register={loginFormRegister}
+            handleSubmit={loginFormHandleSubmit}
+            errors={loginErrors}
+            reset={loginFormReset}
+          />
+          <p onClick={switchToSignupModeHandler}>
+            You don't have an account? SIGN UP
+          </p>
+        </>
+      ) : (
+        <>
+          <SignupForm
+            register={signupFromRegister}
+            handleSubmit={signupFormHandleSubmit}
+            errors={signupErrors}
+            reset={signupFormReset}
+            setIsLoginMode={setIsLoginMode}
+          />
+          <p onClick={switchToLoginModeHandler}>
+            You already have an account? LOG IN
+          </p>
+        </>
+      )}
+    </div>
   );
 };
 

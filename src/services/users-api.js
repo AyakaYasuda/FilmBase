@@ -13,10 +13,22 @@ export const login = (userData) => {
   return api.post('/login', userData).then((res) => res.data);
 };
 
-export const getAllUsers = () => {
-  return api.get('/').then((res) => res.data);
+export const getAllUsers = (token) => {
+  return api
+    .get('/', {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.data.members);
 };
 
-export const getUserById = (id) => {
-  return api.get(`/${id}`).then((res) => res.data);
+export const getUserById = (id, token) => {
+  return api
+    .get(`/${id}`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+    .then((res) => res.data.member);
 };

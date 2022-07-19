@@ -23,3 +23,12 @@ h1 {
 p {
   color: #ffffff;
 }
+
+.section-container {
+  margin: 10rem auto;
+  max-width: 400px;
+  padding: 1rem;
+  height: auto;
+  width: calc(100% - 2rem);
+  text-align: center;
+}
