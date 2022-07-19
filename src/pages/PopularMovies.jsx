@@ -21,10 +21,11 @@ const PopularMovies = () => {
     }
   );
 
+  const { data: dbMovies } = useQuery('movies-db', api.getAllMovies);
+  
   const moviesMutation = useMutation(api.createMovie);
 
   useEffect(() => {
-    console.log('token', token);
     if (movies && token) {
       movies.forEach((movie) => {
         const movieData = {
@@ -35,7 +36,10 @@ const PopularMovies = () => {
           releaseDate: movie.release_date,
           vote: movie.vote_average,
         };
-        moviesMutation.mutate({ data: movieData, token });
+        
+        if (!dbMovies.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
+          moviesMutation.mutate({ data: movieData, token });
+        }
       });
     }
   }, [movies, token]);
