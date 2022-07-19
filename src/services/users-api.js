@@ -23,7 +23,8 @@ export const getAllUsers = (token) => {
     .then((res) => res.data.members);
 };
 
-export const getUserById = (id, token) => {
+export const getUserById = (args) => {
+  const { id, token } = args;
   return api
     .get(`/${id}`, {
       headers: {
@@ -33,22 +34,34 @@ export const getUserById = (id, token) => {
     .then((res) => res.data.member);
 };
 
-export const addFavoriteMovie = (userId, movieId, token) => {
+export const addFavoriteMovie = (args) => {
+  const { userId, movieId, token } = args;
+  console.log(userId, movieId, token);
   return api
-    .put(`/movie/add/${userId}`, movieId, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    .put(
+      `/movie/add/${userId}`,
+      { movieId },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
     .then((res) => res.data);
 };
 
-export const removeFavoriteMovie = (userId, movieId, token) => {
+export const removeFavoriteMovie = (args) => {
+  const { userId, movieId, token } = args;
+  console.log(userId, movieId, token);
   return api
-    .put(`/movie/remove/${userId}`, movieId, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    .put(
+      `/movie/remove/${userId}`,
+      { movieId },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
     .then((res) => res.data);
 };

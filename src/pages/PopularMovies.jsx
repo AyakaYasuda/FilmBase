@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import fetchPopularMovies from '../services/fetchPopularMovies';
@@ -9,6 +9,8 @@ import MoviesList from '../components/Movies/MoviesList';
 const PopularMovies = () => {
   const queryClient = useQueryClient();
   const { token } = useSelector((state) => state.users);
+  const dbMovies = queryClient.getQueryData('DB_MOVIES');
+  const movies = queryClient.getQueryData('MOVIES')?.results;
 
   const { isLoading, isFetching, isError, error } = useQuery(
     'MOVIES',
@@ -19,34 +21,29 @@ const PopularMovies = () => {
     }
   );
 
-  const { data } = useQuery(['DB_MOVIES'], api.getAllMovies, {
+  useQuery(['DB_MOVIES'], api.getAllMovies, {
     retry: false,
     staleTime: Infinity,
   });
 
   const moviesMutation = useMutation(api.createMovie);
 
-  const dbMovies = queryClient.getQueryData('DB_MOVIES');
-  const movies = queryClient.getQueryData('MOVIES')?.results;
+  if (movies && token) {
+    movies.forEach((movie) => {
+      const movieData = {
+        id: movie.id,
+        imagePath: movie.poster_path,
+        title: movie.title,
+        overview: movie.overview,
+        releaseDate: movie.release_date,
+        vote: movie.vote_average,
+      };
 
-  useEffect(() => {
-    if (movies && token) {
-      movies.forEach((movie) => {
-        const movieData = {
-          id: movie.id,
-          imagePath: movie.poster_path,
-          title: movie.title,
-          overview: movie.overview,
-          releaseDate: movie.release_date,
-          vote: movie.vote_average,
-        };
-
-        if (!dbMovies.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
-          moviesMutation.mutate({ data: movieData, token });
-        }
-      });
-    }
-  }, [movies, token]);
+      if (!dbMovies.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
+        moviesMutation.mutate({ data: movieData, token });
+      }
+    });
+  }
 
   if (isLoading || isFetching) {
     return (

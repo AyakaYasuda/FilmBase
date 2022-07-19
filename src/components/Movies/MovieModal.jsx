@@ -5,8 +5,6 @@ import WatchButton from '../UI/WatchButton';
 import classes from './MovieModal.module.css';
 
 const MovieModal = ({ movie, onCloseModal }) => {
-  console.log('movie', movie);
-
   const imageLargePath = 'https://image.tmdb.org/t/p/w300' + movie.poster_path;
 
   return (
@@ -33,7 +31,7 @@ const MovieModal = ({ movie, onCloseModal }) => {
           <div className={classes.boxes}>
             <p className={classes.rate}>{movie.vote_average} / 10</p>
             <div className={classes.buttons}>
-              <FavoriteButton movie={movie} />
+              <FavoriteButton movieId={movie.id} />
               <WatchButton />
             </div>
           </div>

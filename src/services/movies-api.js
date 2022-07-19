@@ -8,8 +8,8 @@ export const getAllMovies = () => {
   return api.get('/').then((res) => res.data.movies);
 };
 
-export const createMovie = (arg) => {
-  const { data, token } = arg;
+export const createMovie = (args) => {
+  const { data, token } = args;
   return api
     .post('/', data, {
       headers: {
