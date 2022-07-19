@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import fetchPopularMovies from '../services/fetchPopularMovies';
 import * as api from '../services/movies-api';
 
 import MoviesList from '../components/Movies/MoviesList';
 
 const PopularMovies = () => {
-  const queryClient = useQueryClient();
   const { token } = useSelector((state) => state.users);
-  const dbMovies = queryClient.getQueryData('DB_MOVIES');
-  const movies = queryClient.getQueryData('MOVIES')?.results;
+  const [movies, setMovies] = useState();
 
   const { isLoading, isFetching, isError, error } = useQuery(
     'MOVIES',
     fetchPopularMovies,
     {
       retry: false,
-      staleTime: Infinity,
+      refetchOnMount: true,
+      onSuccess: (data) => {
+        setMovies(data.results);
+      },
     }
   );
 
-  useQuery(['DB_MOVIES'], api.getAllMovies, {
+  const { data: dbMovies } = useQuery('DB_MOVIES', api.getAllMovies, {
     retry: false,
-    staleTime: Infinity,
+    refetchOnMount: true,
   });
 
   const moviesMutation = useMutation(api.createMovie);

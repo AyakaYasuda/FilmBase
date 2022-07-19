@@ -36,7 +36,6 @@ export const getUserById = (args) => {
 
 export const addFavoriteMovie = (args) => {
   const { userId, movieId, token } = args;
-  console.log(userId, movieId, token);
   return api
     .put(
       `/movie/add/${userId}`,

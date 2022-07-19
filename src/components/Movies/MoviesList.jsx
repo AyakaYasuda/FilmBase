@@ -19,7 +19,9 @@ const MoviesList = ({ movies }) => {
 
   useEffect(() => {
     if (movieId) {
-      const selectedMovieArray = movies.filter((movie) => movie.id === movieId);
+      const selectedMovieArray = movies.filter(
+        (movie) => (movie.id || movie.movie_id) === movieId
+      );
       setSelectedMovie(selectedMovieArray[0]);
     }
   }, [movieId, movies]);
@@ -32,11 +34,11 @@ const MoviesList = ({ movies }) => {
       <div className={classes.container}>
         {movies.map((movie) => (
           <MovieItem
-            key={movie.id}
-            id={movie.id}
+            key={movie.id || movie.movie_id}
+            id={movie.id || movie.movie_id}
             title={movie.title}
             overview={movie.overview}
-            image={movie.poster_path}
+            image={movie.poster_path || movie.image_path}
             release_date={movie.release_date}
             onOpenModal={openModalHandler}
           />
