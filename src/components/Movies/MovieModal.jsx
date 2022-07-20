@@ -5,6 +5,7 @@ import WatchButton from '../UI/WatchButton';
 import classes from './MovieModal.module.css';
 
 const MovieModal = ({ movie, onCloseModal }) => {
+  console.log(movie);
   const imageLargePath =
     'https://image.tmdb.org/t/p/w300' + (movie.image_path || movie.poster_path);
 
@@ -25,7 +26,7 @@ const MovieModal = ({ movie, onCloseModal }) => {
             <span className={classes.spacer}></span>
             <div className={classes['description-flex']}>
               <h1>Release Date</h1>
-              <p>{movie.release_date}</p>
+              <p>{movie.release_date.slice(0, 10)}</p>
             </div>
           </div>
           <span className={classes['line-spacer']}></span>

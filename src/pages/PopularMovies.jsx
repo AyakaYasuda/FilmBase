@@ -40,7 +40,7 @@ const PopularMovies = () => {
         vote: movie.vote_average,
       };
 
-      if (!dbMovies.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
+      if (!dbMovies?.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
         moviesMutation.mutate({ data: movieData, token });
       }
     });
