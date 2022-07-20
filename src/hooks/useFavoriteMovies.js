@@ -7,14 +7,18 @@ const useFavoriteMovies = () => {
   const { uid, token } = useSelector((state) => state.users);
   const [favoriteMoviesIdArr, setFavoriteMoviesIdArr] = useState([]);
 
-  useQuery(['USER', uid], () => api.getUserById({ id: uid, token }), {
-    enabled: !!uid,
-    onSuccess: (data) => {
-      setFavoriteMoviesIdArr(data.favorite_movies);
-    },
-  });
+  const { data: user } = useQuery(
+    ['USER', uid],
+    () => api.getUserById({ id: uid, token }),
+    {
+      enabled: !!uid,
+      onSuccess: (data) => {
+        setFavoriteMoviesIdArr(data.favorite_movies);
+      },
+    }
+  );
 
-  return { favoriteMoviesIdArr };
+  return { favoriteMoviesIdArr, user };
 };
 
 export default useFavoriteMovies;

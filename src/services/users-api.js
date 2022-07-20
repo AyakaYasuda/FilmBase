@@ -17,7 +17,7 @@ export const getAllUsers = (token) => {
   return api
     .get('/', {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res.data.members);
@@ -28,10 +28,25 @@ export const getUserById = (args) => {
   return api
     .get(`/${id}`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res.data.member);
+};
+
+export const getFavoriteMovies = (args) => {
+  const { userId, favoriteMoviesId, token } = args;
+  return api
+    .post(
+      `/${userId}/favorite`,
+      { favoriteMoviesId: [...favoriteMoviesId] },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((res) => res.data.movies);
 };
 
 export const addFavoriteMovie = (args) => {
@@ -42,7 +57,7 @@ export const addFavoriteMovie = (args) => {
       { movieId },
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     )
@@ -51,14 +66,13 @@ export const addFavoriteMovie = (args) => {
 
 export const removeFavoriteMovie = (args) => {
   const { userId, movieId, token } = args;
-  console.log(userId, movieId, token);
   return api
     .put(
       `/movie/remove/${userId}`,
       { movieId },
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     )

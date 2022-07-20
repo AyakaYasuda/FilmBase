@@ -32,7 +32,7 @@ const MovieModal = ({ movie, onCloseModal }) => {
           <div className={classes.boxes}>
             <p className={classes.rate}>{movie.vote_average} / 10</p>
             <div className={classes.buttons}>
-              <FavoriteButton movieId={movie.id} />
+              <FavoriteButton movieId={movie.id || movie.movie_id} />
               <WatchButton />
             </div>
           </div>

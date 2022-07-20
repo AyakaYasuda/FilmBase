@@ -17,17 +17,25 @@ const FavoriteButton = ({ movieId }) => {
     setIsFavorite(favoriteMoviesIdArr?.includes(movieId));
   }, [favoriteMoviesIdArr, movieId]);
 
-  console.log('isFavorite', isFavorite);
-
   const addFavoriteMutation = useMutation(api.addFavoriteMovie, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['USER']);
+      queryClient.invalidateQueries(['USER', uid]);
+      queryClient.invalidateQueries([
+        'FAVORITE_MOVIES',
+        uid,
+        favoriteMoviesIdArr,
+      ]);
     },
   });
 
   const removeFavoriteMutation = useMutation(api.removeFavoriteMovie, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['USER']);
+      queryClient.invalidateQueries(['USER', uid]);
+      queryClient.invalidateQueries([
+        'FAVORITE_MOVIES',
+        uid,
+        favoriteMoviesIdArr,
+      ]);
     },
   });
 

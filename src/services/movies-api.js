@@ -17,7 +17,7 @@ export const createMovie = (args) => {
   return api
     .post('/', data, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res.data);
