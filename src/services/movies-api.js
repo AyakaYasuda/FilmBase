@@ -8,8 +8,15 @@ export const getAllMovies = () => {
   return api.get('/').then((res) => res.data.movies);
 };
 
-export const getMovieById = (id) => {
-  return api.get(`/${id}`).then((res) => res.data.movie);
+export const getMovieById = (args) => {
+  const { movieId, token } = args;
+  return api
+    .get(`/${movieId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data.movie);
 };
 
 export const createMovie = (args) => {

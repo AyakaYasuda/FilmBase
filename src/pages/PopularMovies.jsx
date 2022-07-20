@@ -21,7 +21,7 @@ const PopularMovies = () => {
       },
     }
   );
-  
+
   const { data: dbMovies } = useQuery('DB_MOVIES', api.getAllMovies, {
     retry: false,
     refetchOnMount: true,
@@ -54,10 +54,10 @@ const PopularMovies = () => {
       });
     }
   }, [moviesMutation.status, movies, dbMovies, token, updateMovies]);
-  
+
   if (isLoading || isFetching) {
     return (
-      <div>
+      <div className="section-container">
         <p>Loading...</p>
       </div>
     );
@@ -65,7 +65,7 @@ const PopularMovies = () => {
 
   if (isError) {
     return (
-      <div>
+      <div className="section-container">
         <p>{error}</p>
       </div>
     );

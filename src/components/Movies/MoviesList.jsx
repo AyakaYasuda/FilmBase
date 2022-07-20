@@ -44,7 +44,6 @@ const MoviesList = ({ movies }) => {
           />
         ))}
       </div>
-      <div className={classes.spacer}></div>
     </section>
   );
 };

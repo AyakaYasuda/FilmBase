@@ -23,6 +23,7 @@ const FavoriteMovies = () => {
       }),
     {
       retry: false,
+      refetchOnMount: true,
       enabled: Boolean(favoriteMoviesIdArr?.length !== 0),
       onSuccess: (data) => {
         setMovies(data);
@@ -32,7 +33,7 @@ const FavoriteMovies = () => {
 
   if (isLoading || isFetching) {
     return (
-      <div>
+      <div className="section-container">
         <p>Loading...</p>
       </div>
     );
@@ -40,7 +41,7 @@ const FavoriteMovies = () => {
 
   if (isError) {
     return (
-      <div>
+      <div className="section-container">
         <p>{error.message}</p>
       </div>
     );
