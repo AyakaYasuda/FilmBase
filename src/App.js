@@ -109,7 +109,7 @@ const App = () => {
             }
           />
           <Route
-            path="/reviews/new/:id"
+            path="/my-reviews/:id/new"
             element={
               <ProtectedRoute>
                 <CreateReview />
@@ -117,7 +117,7 @@ const App = () => {
             }
           />
           <Route
-            path="/reviews/edit"
+            path="/my-reviews/:uid/edit/:rid"
             element={
               <ProtectedRoute>
                 <EditReview />

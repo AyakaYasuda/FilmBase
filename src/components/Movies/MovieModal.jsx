@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../UI/Modal';
-import FavoriteButton from '../UI/FavoriteButton';
+import FavoriteButton from './FavoriteButton';
 import WatchButton from '../UI/WatchButton';
 import classes from './MovieModal.module.css';
 
@@ -38,7 +38,7 @@ const MovieModal = ({ movie, onCloseModal }) => {
             </div>
           </div>
         </div>
-        <Link to={`/reviews/new/${movie.id || movie.movie_id}`}>
+        <Link to={`/my-reviews/${movie.id || movie.movie_id}/new`}>
           <button className={classes['review-button']}>Log Film</button>
         </Link>
       </div>

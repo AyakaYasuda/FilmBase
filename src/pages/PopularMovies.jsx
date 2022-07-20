@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery, useMutation } from 'react-query';
 import fetchPopularMovies from '../services/fetchPopularMovies';
@@ -7,15 +7,14 @@ import * as api from '../services/movies-api';
 import MoviesList from '../components/Movies/MoviesList';
 
 const PopularMovies = () => {
+  const [movies, setMovies] = useState([]);
   const { token } = useSelector((state) => state.users);
-  const [movies, setMovies] = useState();
 
   const { isLoading, isFetching, isError, error } = useQuery(
     'MOVIES',
     fetchPopularMovies,
     {
       retry: false,
-      refetchOnMount: true,
       onSuccess: (data) => {
         setMovies(data.results);
       },
@@ -24,7 +23,6 @@ const PopularMovies = () => {
 
   const { data: dbMovies } = useQuery('DB_MOVIES', api.getAllMovies, {
     retry: false,
-    refetchOnMount: true,
   });
 
   const moviesMutation = useMutation(api.createMovie);
@@ -71,7 +69,7 @@ const PopularMovies = () => {
     );
   }
 
-  return <MoviesList movies={movies} />;
+  return movies && <MoviesList movies={movies} />;
 };
 
 export default PopularMovies;

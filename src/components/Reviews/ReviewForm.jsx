@@ -31,13 +31,14 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
   const createReviewMutation = useMutation(api.createReview, {
     onSuccess: () => {
       queryClient.invalidateQueries(['MY_REVIEWS', uid]);
-      navigate(`/my-reviews/${uid}`)
+      navigate(`/my-reviews/${uid}`);
     },
   });
 
   const updateReviewMutation = useMutation(api.editReview, {
     onSuccess: () => {
       queryClient.invalidateQueries(['MY_REVIEWS', uid]);
+      navigate(`/my-reviews/${uid}`);
     },
   });
 
@@ -54,11 +55,10 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
   const updateHandler = (data) => {
     const reviewData = {
       reviewer: data.reviewer,
-      movieId: movieId,
       rate: data.rate,
       comment: data.comment,
     };
-    updateReviewMutation.mutate({ reviewId, reqBody: reviewData, token });
+    updateReviewMutation.mutate({ reviewId, reviewData, token });
   };
 
   const clearFormHandler = () => {

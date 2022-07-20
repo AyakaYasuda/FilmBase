@@ -15,6 +15,17 @@ export const getAllReviews = (args) => {
     .then((res) => res.data.reviews);
 };
 
+export const getReviewById = (args) => {
+  const { token, reviewId } = args;
+  return api
+    .get(`/${reviewId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data.review);
+};
+
 export const getReviewsByUserId = (args) => {
   const { uid, token } = args;
   return api
@@ -31,12 +42,7 @@ export const createReview = (args) => {
   return api
     .post(
       `/member/${uid}`,
-      {
-        reviewer: reviewData.reviewer,
-        movieId: reviewData.movieId,
-        rate: reviewData.rate,
-        comment: reviewData.comment,
-      },
+      reviewData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,16 +53,18 @@ export const createReview = (args) => {
 };
 
 export const editReview = (args) => {
-  const { reviewId, reqBody, token } = args;
-  return api.put(
-    `/${reviewId}`,
-    reqBody,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }.then((res) => res.data)
-  );
+  const { reviewId, reviewData, token } = args;
+  return api
+    .put(
+      `/${reviewId}`,
+      reviewData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((res) => res.data);
 };
 
 export const deleteReview = (args) => {
