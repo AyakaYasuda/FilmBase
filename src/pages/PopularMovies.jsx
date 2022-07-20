@@ -1,39 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useQuery, useMutation } from 'react-query';
+import fetchPopularMovies from '../services/fetchPopularMovies';
+import * as api from '../services/movies-api';
+
 import MoviesList from '../components/Movies/MoviesList';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 const PopularMovies = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [movies, setMovies] = useState([]);
+  const { token } = useSelector((state) => state.users);
+  const [movies, setMovies] = useState();
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsLoading(true);
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
-      );
+  const { isLoading, isFetching, isError, error } = useQuery(
+    'MOVIES',
+    fetchPopularMovies,
+    {
+      retry: false,
+      refetchOnMount: true,
+      onSuccess: (data) => {
+        setMovies(data.results);
+      },
+    }
+  );
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
+  const { data: dbMovies } = useQuery('DB_MOVIES', api.getAllMovies, {
+    retry: false,
+    refetchOnMount: true,
+  });
+
+  const moviesMutation = useMutation(api.createMovie);
+
+  if (movies && token) {
+    movies.forEach((movie) => {
+      const movieData = {
+        id: movie.id,
+        imagePath: movie.poster_path,
+        title: movie.title,
+        overview: movie.overview,
+        releaseDate: movie.release_date,
+        vote: movie.vote_average,
+      };
+
+      if (!dbMovies.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
+        moviesMutation.mutate({ data: movieData, token });
       }
-
-      const responseData = await response.json();
-      const loadedMovies = responseData.results;
-
-      console.log(loadedMovies);
-      setMovies(loadedMovies);
-      setIsLoading(false);
-    };
-
-    fetchMovies().catch((error) => {
-      setIsLoading(false);
-      setError(error.message);
     });
-  }, []);
+  }
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div>
         <p>Loading...</p>
@@ -41,7 +54,7 @@ const PopularMovies = () => {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div>
         <p>{error}</p>

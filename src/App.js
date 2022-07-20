@@ -75,7 +75,10 @@ const App = () => {
       <Header />
       <main>
         <Routes>
-          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/auth"
+            element={isLoggedIn ? <PopularMovies /> : <Auth />}
+          />
           <Route
             path="/movies"
             element={
