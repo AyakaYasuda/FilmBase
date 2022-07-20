@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import * as api from '../services/users-api';
@@ -11,9 +11,14 @@ import MoviesList from '../components/Movies/MoviesList';
 const FavoriteMovies = () => {
   const { uid, token } = useSelector((state) => state.users);
   const { favoriteMoviesIdArr } = useFavoriteMovies();
-  const [movies, setMovies] = useState([]);
 
-  const { isLoading, isFetching, isError, error } = useQuery(
+  const {
+    isLoading,
+    isFetching,
+    isError,
+    error,
+    data: movies,
+  } = useQuery(
     ['FAVORITE_MOVIES', uid, favoriteMoviesIdArr],
     () =>
       api.getFavoriteMovies({
@@ -23,16 +28,14 @@ const FavoriteMovies = () => {
       }),
     {
       retry: false,
+      initialData: [],
       enabled: Boolean(favoriteMoviesIdArr?.length !== 0),
-      onSuccess: (data) => {
-        setMovies(data);
-      },
     }
   );
 
   if (isLoading || isFetching) {
     return (
-      <div>
+      <div className="section-container">
         <p>Loading...</p>
       </div>
     );
@@ -40,7 +43,7 @@ const FavoriteMovies = () => {
 
   if (isError) {
     return (
-      <div>
+      <div className="section-container">
         <p>{error.message}</p>
       </div>
     );

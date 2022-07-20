@@ -32,19 +32,19 @@ const MoviesList = ({ movies }) => {
         <MovieModal movie={selectedMovie} onCloseModal={closeModalHandler} />
       )}
       <div className={classes.container}>
-        {movies.map((movie) => (
-          <MovieItem
-            key={movie.id || movie.movie_id}
-            id={movie.id || movie.movie_id}
-            title={movie.title}
-            overview={movie.overview}
-            image={movie.poster_path || movie.image_path}
-            release_date={movie.release_date}
-            onOpenModal={openModalHandler}
-          />
-        ))}
+        {movies.length !== 0 &&
+          movies.map((movie) => (
+            <MovieItem
+              key={movie.id || movie.movie_id}
+              id={movie.id || movie.movie_id}
+              title={movie.title}
+              overview={movie.overview}
+              image={movie.poster_path || movie.image_path}
+              release_date={movie.release_date}
+              onOpenModal={openModalHandler}
+            />
+          ))}
       </div>
-      <div className={classes.spacer}></div>
     </section>
   );
 };

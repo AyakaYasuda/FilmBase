@@ -5,7 +5,6 @@ const api = axios.create({
 });
 
 export const signup = (userData) => {
-  console.log(process.env.REACT_APP_FILMBASE_API_MEMBERS);
   return api.post('/signup', userData).then((res) => res.data);
 };
 

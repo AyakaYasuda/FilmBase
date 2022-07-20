@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Modal from '../UI/Modal';
-import FavoriteButton from '../UI/FavoriteButton';
+import FavoriteButton from './FavoriteButton';
 import WatchButton from '../UI/WatchButton';
 import classes from './MovieModal.module.css';
 
@@ -25,7 +26,7 @@ const MovieModal = ({ movie, onCloseModal }) => {
             <span className={classes.spacer}></span>
             <div className={classes['description-flex']}>
               <h1>Release Date</h1>
-              <p>{movie.release_date}</p>
+              <p>{movie.release_date.slice(0, 10)}</p>
             </div>
           </div>
           <span className={classes['line-spacer']}></span>
@@ -37,7 +38,9 @@ const MovieModal = ({ movie, onCloseModal }) => {
             </div>
           </div>
         </div>
-        <button className={classes['review-button']}>Log Film</button>
+        <Link to={`/my-reviews/${movie.id || movie.movie_id}/new`}>
+          <button className={classes['review-button']}>Log Film</button>
+        </Link>
       </div>
     </Modal>
   );

@@ -1,16 +1,26 @@
 import React from 'react';
 import { useMutation } from 'react-query';
 import * as api from '../../services/users-api';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import classes from './SignupForm.module.css';
 
-const SignupForm = ({
-  register,
-  handleSubmit,
-  errors,
-  reset,
-  setIsLoginMode,
-}) => {
+const signupUserSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null]),
+});
+
+const SignupForm = ({ setIsLoginMode }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(signupUserSchema) });
+
   const signupMutation = useMutation(api.signup, {
     onSuccess: () => {
       reset();

@@ -2,13 +2,28 @@ import React from 'react';
 import { useMutation } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as api from '../../services/users-api';
 import { login } from '../../redux/usersSlice';
 import classes from './LoginForm.module.css';
 
-const LoginForm = ({ register, handleSubmit, errors, reset }) => {
+const loginUserSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+});
+
+const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(loginUserSchema) });
 
   const loginMutation = useMutation(api.login, {
     onSuccess: (data) => {

@@ -75,10 +75,7 @@ const App = () => {
       <Header />
       <main>
         <Routes>
-          <Route
-            path="/auth"
-            element={isLoggedIn ? <PopularMovies /> : <Auth />}
-          />
+          <Route exact path="/auth" element={<Auth />} />
           <Route
             path="/movies"
             element={
@@ -88,7 +85,7 @@ const App = () => {
             }
           />
           <Route
-            path="/movies/favorites"
+            path="/favorites"
             element={
               <ProtectedRoute>
                 <FavoriteMovies />
@@ -104,7 +101,7 @@ const App = () => {
             }
           />
           <Route
-            path="/reviews/:id"
+            path="/my-reviews/:id"
             element={
               <ProtectedRoute>
                 <MyReviews />
@@ -112,7 +109,7 @@ const App = () => {
             }
           />
           <Route
-            path="/reviews/new"
+            path="/my-reviews/:id/new"
             element={
               <ProtectedRoute>
                 <CreateReview />
@@ -120,7 +117,7 @@ const App = () => {
             }
           />
           <Route
-            path="/reviews/edit"
+            path="/my-reviews/:uid/edit/:rid"
             element={
               <ProtectedRoute>
                 <EditReview />

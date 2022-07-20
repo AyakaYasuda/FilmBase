@@ -24,8 +24,12 @@ p {
   color: #ffffff;
 }
 
+button {
+  cursor: pointer;
+}
+
 .section-container {
-  margin: 10rem auto;
+  margin: 8rem auto;
   max-width: 400px;
   padding: 1rem;
   height: auto;

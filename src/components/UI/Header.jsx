@@ -8,13 +8,14 @@ import classes from './Header.module.css';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.users);
+  const { isLoggedIn, uid } = useSelector((state) => state.users);
 
   const logoutHandler = () => {
     localStorage.removeItem('userData');
     dispatch(logout());
     navigate('/');
   };
+
 
   return (
     <>
@@ -28,20 +29,35 @@ const Header = () => {
             <NavLink
               to="/movies"
               className={({ isActive }) =>
-                `${classes.link} ${isActive ? classes.active : ''}`
+                `${classes.link} ${isActive ? classes.active : undefined}`
               }
             >
               Popular
             </NavLink>
             <NavLink
-              to="/movies/favorites"
+              to="/favorites"
               className={({ isActive }) =>
-                `${classes.link} ${isActive ? classes.active : ''}`
+                `${classes.link} ${isActive ? classes.active : undefined}`
               }
             >
               Favorites
             </NavLink>
-            <li className={classes.link}>Watched</li>
+            <NavLink
+              to="/reviews"
+              className={({ isActive }) =>
+                `${classes.link} ${isActive ? classes.active : undefined}`
+              }
+            >
+              Reviews
+            </NavLink>
+            <NavLink
+              to={`/my-reviews/${uid}`}
+              className={({ isActive }) =>
+                `${classes.link} ${isActive ? classes.active : undefined}`
+              }
+            >
+              My Reviews
+            </NavLink>
           </ul>
         )}
       </header>
