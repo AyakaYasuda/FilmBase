@@ -38,7 +38,9 @@ const MovieModal = ({ movie, onCloseModal }) => {
             </div>
           </div>
         </div>
-        <Link to="/reviews/new" className={classes['review-button']}>Log Film</Link>
+        <Link to="/reviews/new">
+          <button className={classes['review-button']}>Log Film</button>
+        </Link>
       </div>
     </Modal>
   );

@@ -77,7 +77,6 @@ const App = () => {
         <Routes>
           <Route exact path="/auth" element={<Auth />} />
           <Route
-            exact
             path="/movies"
             element={
               <ProtectedRoute>
@@ -86,7 +85,6 @@ const App = () => {
             }
           />
           <Route
-            exact
             path="/favorites"
             element={
               <ProtectedRoute>
@@ -95,7 +93,6 @@ const App = () => {
             }
           />
           <Route
-            exact
             path="/reviews"
             element={
               <ProtectedRoute>
@@ -112,7 +109,6 @@ const App = () => {
             }
           />
           <Route
-            exact
             path="/reviews/new"
             element={
               <ProtectedRoute>
@@ -121,7 +117,6 @@ const App = () => {
             }
           />
           <Route
-            exact
             path="/reviews/edit"
             element={
               <ProtectedRoute>

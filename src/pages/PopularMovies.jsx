@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery, useMutation } from 'react-query';
 import fetchPopularMovies from '../services/fetchPopularMovies';
@@ -21,7 +21,7 @@ const PopularMovies = () => {
       },
     }
   );
-
+  
   const { data: dbMovies } = useQuery('DB_MOVIES', api.getAllMovies, {
     retry: false,
     refetchOnMount: true,
@@ -29,23 +29,32 @@ const PopularMovies = () => {
 
   const moviesMutation = useMutation(api.createMovie);
 
-  if (movies && token) {
-    movies.forEach((movie) => {
-      const movieData = {
-        id: movie.id,
-        imagePath: movie.poster_path,
-        title: movie.title,
-        overview: movie.overview,
-        releaseDate: movie.release_date,
-        vote: movie.vote_average,
-      };
+  const updateMovies = useCallback(
+    (movieData, token) => {
+      moviesMutation.mutate({ data: movieData, token });
+    },
+    [moviesMutation]
+  );
 
-      if (!dbMovies?.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
-        moviesMutation.mutate({ data: movieData, token });
-      }
-    });
-  }
+  useEffect(() => {
+    if (moviesMutation.status === 'success') {
+      movies.forEach((movie) => {
+        const movieData = {
+          id: movie.id,
+          imagePath: movie.poster_path,
+          title: movie.title,
+          overview: movie.overview,
+          releaseDate: movie.release_date,
+          vote: movie.vote_average,
+        };
 
+        if (!dbMovies?.map((dbMovie) => dbMovie.movie_id).includes(movie.id)) {
+          updateMovies(movieData, token);
+        }
+      });
+    }
+  }, [moviesMutation.status, movies, dbMovies, token, updateMovies]);
+  
   if (isLoading || isFetching) {
     return (
       <div>
