@@ -109,7 +109,7 @@ const App = () => {
             }
           />
           <Route
-            path="/reviews/new"
+            path="/reviews/new/:id"
             element={
               <ProtectedRoute>
                 <CreateReview />
