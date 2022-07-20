@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Modal from '../UI/Modal';
 import FavoriteButton from '../UI/FavoriteButton';
 import WatchButton from '../UI/WatchButton';
 import classes from './MovieModal.module.css';
 
 const MovieModal = ({ movie, onCloseModal }) => {
-  console.log(movie);
   const imageLargePath =
     'https://image.tmdb.org/t/p/w300' + (movie.image_path || movie.poster_path);
 
@@ -38,7 +38,7 @@ const MovieModal = ({ movie, onCloseModal }) => {
             </div>
           </div>
         </div>
-        <button className={classes['review-button']}>Log Film</button>
+        <Link to="/reviews/new" className={classes['review-button']}>Log Film</Link>
       </div>
     </Modal>
   );
