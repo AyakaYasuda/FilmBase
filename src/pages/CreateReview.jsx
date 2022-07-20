@@ -8,7 +8,7 @@ const CreateReview = () => {
 
   return (
     <div className="section-container">
-      <ReviewForm movieId={movieId} />
+      <ReviewForm movieId={movieId} submitType="create" />
     </div>
   );
 };

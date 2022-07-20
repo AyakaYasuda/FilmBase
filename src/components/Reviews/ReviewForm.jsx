@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -15,8 +15,9 @@ const reviewSchema = yup.object().shape({
   comment: yup.string(),
 });
 
-const ReviewForm = ({ movieId, preloadedValues, submitType }) => {
+const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { uid, token } = useSelector((state) => state.users);
 
   const {
@@ -27,15 +28,45 @@ const ReviewForm = ({ movieId, preloadedValues, submitType }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(reviewSchema) });
 
-  const createReviewMutation = useMutation();
-  const updateReviewMutation = useMutation();
+  const createReviewMutation = useMutation(api.createReview, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['MY_REVIEWS', uid]);
+      navigate(`/my-reviews/${uid}`)
+    },
+  });
 
-  const submitHandler = () => {};
+  const updateReviewMutation = useMutation(api.editReview, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['MY_REVIEWS', uid]);
+    },
+  });
+
+  const createHandler = (data) => {
+    const reviewData = {
+      reviewer: data.reviewer,
+      movieId: movieId,
+      rate: data.rate,
+      comment: data.comment,
+    };
+    createReviewMutation.mutate({ uid, token, reviewData });
+  };
+
+  const updateHandler = (data) => {
+    const reviewData = {
+      reviewer: data.reviewer,
+      movieId: movieId,
+      rate: data.rate,
+      comment: data.comment,
+    };
+    updateReviewMutation.mutate({ reviewId, reqBody: reviewData, token });
+  };
 
   const clearFormHandler = () => {
     reset();
     navigate(`/my-reviews/${uid}`);
   };
+
+  const submitHandler = submitType === 'create' ? createHandler : updateHandler;
 
   useEffect(() => {
     setValue('reviewer', preloadedValues?.reviewer);
@@ -62,7 +93,7 @@ const ReviewForm = ({ movieId, preloadedValues, submitType }) => {
         </p>
 
         <label className={classes['form-label']} htmlFor="rate">
-          rate
+          Rate
         </label>
         <input
           className={classes['form-input']}
@@ -77,7 +108,7 @@ const ReviewForm = ({ movieId, preloadedValues, submitType }) => {
         <p className={classes['form-error-message']}>{errors.rate?.message}</p>
 
         <label className={classes['form-label']} htmlFor="comment">
-          Memo
+          Comment
         </label>
         <textarea
           className={classes['form-input']}

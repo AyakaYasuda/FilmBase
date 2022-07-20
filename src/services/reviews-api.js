@@ -50,7 +50,7 @@ export const editReview = (args) => {
   const { reviewId, reqBody, token } = args;
   return api.put(
     `/${reviewId}`,
-    { reqBody },
+    reqBody,
     {
       headers: {
         Authorization: `Bearer ${token}`,
