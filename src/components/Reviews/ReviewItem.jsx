@@ -33,7 +33,7 @@ const ReviewItem = ({ review }) => {
       <h1>{movie?.title}</h1>
       <p>{review.comment}</p>
       <p>{review.rate}</p>
-      <p>By {review.reviewer}</p>
+      <p>By {review.name}</p>
       {review.reviewer_id === uid && (
         <>
           <Link to={`/my-reviews/${uid}/edit/${review.review_id}`}>

@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import classes from './SignupForm.module.css';
 
 const signupUserSchema = yup.object().shape({
+  username: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
   confirmPassword: yup.string().oneOf([yup.ref('password'), null]),
@@ -23,6 +24,7 @@ const SignupForm = ({ setIsLoginMode }) => {
 
   const signupMutation = useMutation(api.signup, {
     onSuccess: () => {
+      console.log('success');
       reset();
       setIsLoginMode(true);
     },
@@ -30,6 +32,7 @@ const SignupForm = ({ setIsLoginMode }) => {
 
   const signupHandler = (data) => {
     const userData = {
+      username: data.username,
       email: data.email,
       password: data.password,
     };
@@ -44,6 +47,14 @@ const SignupForm = ({ setIsLoginMode }) => {
         className={classes['signup-form']}
         onSubmit={handleSubmit(signupHandler)}
       >
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          className={classes['signup-input']}
+          {...register('username')}
+        />
+        <p className={classes['signup-error']}>{errors.username?.message}</p>
         <input
           type="email"
           name="email"
