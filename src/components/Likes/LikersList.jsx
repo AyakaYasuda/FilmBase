@@ -2,7 +2,6 @@ import React from 'react';
 import LikerItem from './LikerItem';
 
 const LikersList = ({ setIsLikesListShown, likes }) => {
-  console.log(likes);
   return (
     <div onClick={() => setIsLikesListShown(false)}>
       {likes.length !== 0 &&
