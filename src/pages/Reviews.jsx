@@ -28,7 +28,9 @@ const Reviews = () => {
   return (
     <div className="section-container">
       {reviews.length !== 0 &&
-        reviews.map((review) => <ReviewItem review={review} />)}
+        reviews.map((review) => (
+          <ReviewItem key={review.review_id} review={review} />
+        ))}
     </div>
   );
 };

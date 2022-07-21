@@ -8,7 +8,7 @@ import classes from './Header.module.css';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn, uid } = useSelector((state) => state.users);
+  const { isLoggedIn, uid, username } = useSelector((state) => state.users);
 
   const logoutHandler = () => {
     localStorage.removeItem('userData');
@@ -16,13 +16,19 @@ const Header = () => {
     navigate('/');
   };
 
-
   return (
     <>
       <header className={classes.header}>
         <div className={classes.title}>
           <h1>Filmbase</h1>
-          {isLoggedIn && <p onClick={logoutHandler}>log out</p>}
+          {isLoggedIn && (
+            <div>
+              <p>
+                Welcome back <span>{username && username}</span>!
+              </p>
+              <p onClick={logoutHandler}>log out</p>
+            </div>
+          )}
         </div>
         {isLoggedIn && (
           <ul className={classes.menu}>
