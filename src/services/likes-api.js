@@ -45,8 +45,7 @@ export const removeLike = (args) => {
   const { reviewId, userId, token } = args;
   return api
     .delete(
-      `/${reviewId}`,
-      { memberId: userId },
+      `/member/${userId}/${reviewId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
