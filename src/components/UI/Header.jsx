@@ -2,13 +2,15 @@ import React from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/usersSlice';
+import useUser from '../../hooks/useUser';
 
 import classes from './Header.module.scss';
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn, uid, username } = useSelector((state) => state.users);
+  const { isLoggedIn, uid } = useSelector((state) => state.users);
+  const { user } = useUser();
 
   const logoutHandler = () => {
     localStorage.removeItem('userData');
@@ -24,7 +26,7 @@ const Header = () => {
           {isLoggedIn && (
             <div>
               <h4>
-                Welcome back <span>{username && username}</span>!
+                Welcome back <span>{user && user.name}</span>!
               </h4>
               <button onClick={logoutHandler}>log out</button>
             </div>

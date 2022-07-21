@@ -1,11 +1,9 @@
 import React from 'react';
 import { useMutation } from 'react-query';
-import { useDispatch } from 'react-redux';
 import * as api from '../../services/users-api';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signup } from '../../redux/usersSlice';
 
 import classes from './SignupForm.module.css';
 
@@ -17,7 +15,6 @@ const signupUserSchema = yup.object().shape({
 });
 
 const SignupForm = ({ setIsLoginMode }) => {
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,8 +24,6 @@ const SignupForm = ({ setIsLoginMode }) => {
 
   const signupMutation = useMutation(api.signup, {
     onSuccess: (data) => {
-      dispatch(signup({ username: data }));
-
       reset();
       setIsLoginMode(true);
     },

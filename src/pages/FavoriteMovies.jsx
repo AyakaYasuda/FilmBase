@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import * as api from '../services/users-api';
 
-import useFavoriteMovies from '../hooks/useFavoriteMovies';
+import useUser from '../hooks/useUser';
 
 import MoviesList from '../components/Movies/MoviesList';
 // import classes from './FavoriteMovies.module.css';
 
 const FavoriteMovies = () => {
   const { uid, token } = useSelector((state) => state.users);
-  const { favoriteMoviesIdArr } = useFavoriteMovies();
+  const { favoriteMoviesIdArr } = useUser();
 
   const {
     isLoading,
