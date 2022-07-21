@@ -10,6 +10,8 @@ import Reviews from './pages/Reviews';
 import MyReviews from './pages/MyReviews';
 import CreateReview from './pages/CreateReview';
 import EditReview from './pages/EditReview';
+import UsersReviews from './pages/UsersReviews';
+import UsersLikes from './pages/UsersLikes';
 import Header from './components/UI/Header';
 
 const App = () => {
@@ -97,6 +99,22 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Reviews />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reviews/:uid"
+            element={
+              <ProtectedRoute>
+                <UsersReviews />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/likes/:uid"
+            element={
+              <ProtectedRoute>
+                <UsersLikes />
               </ProtectedRoute>
             }
           />
