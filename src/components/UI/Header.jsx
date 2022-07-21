@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/usersSlice';
 
-import classes from './Header.module.css';
+import classes from './Header.module.scss';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,14 +19,14 @@ const Header = () => {
   return (
     <>
       <header className={classes.header}>
-        <div className={classes.title}>
+        <div className={classes.top}>
           <h1>Filmbase</h1>
           {isLoggedIn && (
             <div>
-              <p>
+              <h4>
                 Welcome back <span>{username && username}</span>!
-              </p>
-              <p onClick={logoutHandler}>log out</p>
+              </h4>
+              <button onClick={logoutHandler}>log out</button>
             </div>
           )}
         </div>
