@@ -10,7 +10,6 @@ import * as api from '../../services/reviews-api';
 import classes from './ReviewForm.module.css';
 
 const reviewSchema = yup.object().shape({
-  reviewer: yup.string().required(),
   rate: yup.number().required(),
   comment: yup.string(),
 });
@@ -44,7 +43,6 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
 
   const createHandler = (data) => {
     const reviewData = {
-      reviewer: data.reviewer,
       movieId: movieId,
       rate: data.rate,
       comment: data.comment,
@@ -54,7 +52,6 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
 
   const updateHandler = (data) => {
     const reviewData = {
-      reviewer: data.reviewer,
       rate: data.rate,
       comment: data.comment,
     };
@@ -69,7 +66,6 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
   const submitHandler = submitType === 'create' ? createHandler : updateHandler;
 
   useEffect(() => {
-    setValue('reviewer', preloadedValues?.reviewer);
     setValue('rate', preloadedValues?.rate);
     setValue('comment', preloadedValues?.comment);
   }, [setValue, preloadedValues]);
@@ -78,20 +74,6 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
     <>
       <h1>REVIEW</h1>
       <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
-        <label className={classes['form-label']} htmlFor="reviewer">
-          Reviewer
-        </label>
-        <input
-          className={classes['form-input']}
-          type="text"
-          id="reviewer"
-          name="reviewer"
-          {...register('reviewer')}
-        />
-        <p className={classes['form-error-message']}>
-          {errors.reviewer?.message}
-        </p>
-
         <label className={classes['form-label']} htmlFor="rate">
           Rate
         </label>

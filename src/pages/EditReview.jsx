@@ -21,7 +21,6 @@ const EditReview = () => {
         submitType="update"
         reviewId={reviewId}
         preloadedValues={{
-          reviewer: review.reviewer,
           rate: review.rate,
           comment: review.comment,
         }}

@@ -13,10 +13,6 @@ const FavoriteButton = ({ movieId }) => {
   const [isFavorite, setIsFavorite] = useState();
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    setIsFavorite(favoriteMoviesIdArr?.includes(movieId));
-  }, [favoriteMoviesIdArr, movieId]);
-
   const addFavoriteMutation = useMutation(api.addFavoriteMovie, {
     onSuccess: () => {
       queryClient.invalidateQueries(['USER', uid]);
@@ -48,6 +44,10 @@ const FavoriteButton = ({ movieId }) => {
     removeFavoriteMutation.mutate({ userId: uid, movieId, token });
     setIsFavorite(false);
   };
+
+  useEffect(() => {
+    setIsFavorite(favoriteMoviesIdArr?.includes(movieId));
+  }, [favoriteMoviesIdArr, movieId]);
 
   return isFavorite ? (
     <FavoriteIcon

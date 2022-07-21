@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import * as movieApi from '../../services/movies-api';
 import * as reviewApi from '../../services/reviews-api';
 
+import LikeButton from '../Likes/LikeButton';
+
 const ReviewItem = ({ review }) => {
   const { uid, token } = useSelector((state) => state.users);
   const movieId = review.movie_id;
@@ -19,7 +21,6 @@ const ReviewItem = ({ review }) => {
   const deleteReviewMutation = useMutation(reviewApi.deleteReview, {
     onSuccess: () => {
       queryClient.invalidateQueries(['MY_REVIEWS', uid]);
-      console.log('deleted');
     },
   });
 
@@ -32,11 +33,16 @@ const ReviewItem = ({ review }) => {
       <h1>{movie?.title}</h1>
       <p>{review.comment}</p>
       <p>{review.rate}</p>
-      <p>By {review.reviewer}</p>
-      <Link to={`/my-reviews/${uid}/edit/${review.review_id}`}>
-        <button>edit</button>
-      </Link>
-      <button onClick={deleteHandler}>delete</button>
+      <p>By {review.name}</p>
+      {review.reviewer_id === uid && (
+        <>
+          <Link to={`/my-reviews/${uid}/edit/${review.review_id}`}>
+            <button>edit</button>
+          </Link>
+          <button onClick={deleteHandler}>delete</button>
+        </>
+      )}
+      <LikeButton reviewId={review.review_id} />
     </div>
   );
 };
