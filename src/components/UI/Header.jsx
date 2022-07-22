@@ -57,7 +57,7 @@ const Header = () => {
               Popular
             </NavLink>
             <NavLink
-              to="/favorites"
+              to="/favorite"
               className={({ isActive }) =>
                 `${classes.link} ${isActive ? classes.active : undefined}`
               }
