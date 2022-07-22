@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/usersSlice';
 import useUser from '../../hooks/useUser';
 
+import Logo from './Logo';
 import classes from './Header.module.scss';
 
 const Header = () => {
@@ -21,16 +22,29 @@ const Header = () => {
   return (
     <>
       <header className={classes.header}>
-        <div className={classes.top}>
-          <h1>Filmbase</h1>
+        <div className={classes['mobile-top']}>
+          <div className={classes.flex}>
+            <Logo />
+            {isLoggedIn && <button onClick={logoutHandler}>log out</button>}
+          </div>
           {isLoggedIn && (
-            <div>
-              <h4>
-                Welcome back <span>{user && user.name}</span>!
-              </h4>
-              <button onClick={logoutHandler}>log out</button>
-            </div>
+            <h4>
+              Welcome back{' '}
+              <span className={classes.name}>{user && user.name}</span> !
+            </h4>
           )}
+        </div>
+        <div className={classes['desktop-top']}>
+          <Logo />
+          <div className={classes.flex}>
+            {isLoggedIn && (
+              <h4>
+                Welcome back{' '}
+                <span className={classes.name}>{user && user.name}</span> !
+              </h4>
+            )}
+            {isLoggedIn && <button onClick={logoutHandler}>log out</button>}
+          </div>
         </div>
         {isLoggedIn && (
           <ul className={classes.menu}>
@@ -48,7 +62,7 @@ const Header = () => {
                 `${classes.link} ${isActive ? classes.active : undefined}`
               }
             >
-              Favorites
+              Favorite
             </NavLink>
             <NavLink
               to="/reviews"

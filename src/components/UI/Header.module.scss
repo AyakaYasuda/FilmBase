@@ -2,53 +2,79 @@
 
 .header {
   @include max-width;
-  @include center-col;
   width: 100%;
   background-color: rgba(249, 250, 251, 0.1);
   opacity: 0.8;
   backdrop-filter: blur(16px);
-  padding: 1.5rem;
+  padding: 1rem;
   position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
 }
 
-.top {
-  @include center-col;
-
-  @include media-md {
-    @include center-row;
+.mobile-top {
+  .flex {
+    @include flex-between;
   }
 
-  h1 {
-    color: $primary-color;
+  h4 {
+    text-align: left;
+  }
+
+  .name {
+    color: $secondary-color;
+  }
+
+  @include media-md {
+    display: none;
+  }
+}
+
+.desktop-top {
+  display: none;
+
+  @include media-md {
+    @include flex-between;
+
+    .flex {
+      @include flex-between;
+
+      h4 {
+        text-align: center;
+        margin-right: 1rem;
+      }
+
+      .name {
+        color: $secondary-color;
+      }
+    }
   }
 }
 
 .menu {
+  margin-top: 1rem;
   list-style: none;
   display: flex;
   justify-content: center;
 }
 
 .link {
-  padding: 1rem 0.5rem 0.8rem;
-  margin: 0 1rem;
-  text-decoration: none;
+  margin: 0 0.5rem;
+  padding: 0.5rem 0rem;
+  text-align: center;
   color: #ffffff;
-  font-size: 1.2rem;
+
+  @include media-sm {
+    padding: 0.5rem;
+  }
 }
 
 .link:hover {
+  @include hover-effect;
   border-bottom: 2px solid #ef697d;
-  transform: translateY(-3px);
-  transition-duration: 0.1s;
 }
 
 .active {
   border-bottom: 2px solid #ef697d;
-}
-
-@media (min-width: 768px) {
 }

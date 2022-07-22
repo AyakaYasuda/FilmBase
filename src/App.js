@@ -87,7 +87,7 @@ const App = () => {
             }
           />
           <Route
-            path="/favorites"
+            path="/favorite"
             element={
               <ProtectedRoute>
                 <FavoriteMovies />

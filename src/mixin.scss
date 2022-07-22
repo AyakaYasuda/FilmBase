@@ -39,7 +39,7 @@ $base-color: #ffffff;
   transition-duration: 300ms;
 }
 
-@mixin center-col {
+@mixin flex-col-center {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -47,11 +47,19 @@ $base-color: #ffffff;
   align-items: center;
 }
 
-@mixin center-row {
+@mixin flex-center {
   text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
