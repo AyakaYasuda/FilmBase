@@ -152,6 +152,8 @@ input {
   border: none;
   width: 80vw;
   color: rgb(71 85 105);
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
 
   &:hover {
     @include hover-effect;
@@ -159,11 +161,13 @@ input {
 
   &:focus {
     color: rgb(71 85 105);
-    background-color: rgb(254 252 232);
+    background-color: rgb(254 240 138);
   }
 
   @include media-sm {
     width: 18rem;
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
   }
 }
 
@@ -188,4 +192,3 @@ button {
     padding: 0.7rem 1.25rem;
   }
 }
-

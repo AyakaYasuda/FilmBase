@@ -22,6 +22,7 @@ const PopularMovies = () => {
     return <LoadingSpinner />;
   }
 
+  // FIXME: error handling
   if (isError) {
     return (
       <div className={classes['popular-movies-container']}>
@@ -32,7 +33,7 @@ const PopularMovies = () => {
 
   return (
     <div className={classes['popular-movies-container']}>
-      {movies && <MoviesList movies={movies} />};
+      {movies && <MoviesList movies={movies} />}
     </div>
   );
 };

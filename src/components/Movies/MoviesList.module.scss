@@ -1,0 +1,14 @@
+@import '../../mixin.scss';
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  column-gap: 0.5rem;
+  row-gap: 1rem;
+  justify-items: center;
+  align-items: center;
+
+  @include media-sm {
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  }
+}

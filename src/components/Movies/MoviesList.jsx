@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import classes from './MoviesList.module.css';
+
 import MovieModal from './MovieModal';
 import MovieItem from './MovieItem';
+import classes from './MoviesList.module.scss';
 
 const MoviesList = ({ movies }) => {
   const [modalIsShown, setModalIsShown] = useState(false);
@@ -27,11 +28,12 @@ const MoviesList = ({ movies }) => {
   }, [movieId, movies]);
 
   return (
-    <section className={classes['movies-list']}>
-      {modalIsShown && selectedMovie && (
+    <>
+      {/* {modalIsShown && selectedMovie && (
         <MovieModal movie={selectedMovie} onCloseModal={closeModalHandler} />
-      )}
-      <div className={classes.container}>
+      )} */}
+
+      <div className={classes["movies-list"]}>
         {movies.length !== 0 &&
           movies.map((movie) => (
             <MovieItem
@@ -45,7 +47,7 @@ const MoviesList = ({ movies }) => {
             />
           ))}
       </div>
-    </section>
+    </>
   );
 };
 
