@@ -6,7 +6,8 @@ import * as api from '../services/users-api';
 import useUser from '../hooks/useUser';
 
 import MoviesList from '../components/Movies/MoviesList';
-// import classes from './FavoriteMovies.module.css';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
+import classes from './FavoriteMovies.module.scss';
 
 const FavoriteMovies = () => {
   const { uid, token } = useSelector((state) => state.users);
@@ -34,22 +35,23 @@ const FavoriteMovies = () => {
   );
 
   if (isLoading || isFetching) {
-    return (
-      <div className="section-container">
-        <p>Loading...</p>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
+  // FIXME: error handling
   if (isError) {
     return (
-      <div className="section-container">
+      <div className={classes['favorite-movies-container']}>
         <p>{error.message}</p>
       </div>
     );
   }
 
-  return movies && <MoviesList movies={movies} />;
+  return (
+    <div className={classes['favorite-movies-container']}>
+      {movies && <MoviesList movies={movies} />}
+    </div>
+  );
 };
 
 export default FavoriteMovies;
