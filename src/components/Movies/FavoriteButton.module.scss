@@ -1,0 +1,6 @@
+@import '../../mixin.scss';
+
+.favorite-button {
+  @include flex-center;
+  margin: 0.5rem;
+}

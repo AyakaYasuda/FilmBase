@@ -35,10 +35,12 @@ const MoviesList = ({ movies }) => {
           <MovieModalMobile
             movie={selectedMovie}
             onCloseModal={closeModalHandler}
+            className={classes["movie-modal-mobile"]}
           />
           <MovieModalDesktop
             movie={selectedMovie}
             onCloseModal={closeModalHandler}
+            className={classes["movie-modal-desktop"]}
           />
         </>
       )}

@@ -1,13 +1,5 @@
 @import '../../mixin.scss';
 
-.mobile {
-  display: block;
-
-  @include media-md {
-    display: none;
-  }
-}
-
 .movie-modal {
   position: relative;
 
@@ -67,6 +59,7 @@
 
     .buttons {
       @include flex-center;
+      margin-bottom: 1rem;
     }
   }
 }

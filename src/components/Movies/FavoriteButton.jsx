@@ -6,6 +6,7 @@ import useUser from '../../hooks/useUser';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import classes from './FavoriteButton.module.scss';
 
 const FavoriteButton = ({ movieId }) => {
   const { uid, token } = useSelector((state) => state.users);
@@ -50,21 +51,18 @@ const FavoriteButton = ({ movieId }) => {
   }, [favoriteMoviesIdArr, movieId]);
 
   return isFavorite ? (
-    <>
-      <h2>liked</h2>
-      <FavoriteIcon
-        sx={{ color: '#ffe251', fontSize: 30 }}
-        onClick={unsetFavoriteHandler}
-      />
-    </>
+    <button
+      className={classes['favorite-button']}
+      onClick={unsetFavoriteHandler}
+    >
+      <h6>liked</h6>
+      <FavoriteIcon sx={{ color: '#ffe251', fontSize: 24 }} />
+    </button>
   ) : (
-    <>
-      <h2>like</h2>
-      <FavoriteBorderIcon
-        sx={{ color: '#ffe251', fontSize: 30 }}
-        onClick={setFavoriteHandler}
-      />
-    </>
+    <button className={classes['favorite-button']} onClick={setFavoriteHandler}>
+      <h6>like</h6>
+      <FavoriteBorderIcon sx={{ color: '#ffe251', fontSize: 24 }} />
+    </button>
   );
 };
 

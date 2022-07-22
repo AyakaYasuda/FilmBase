@@ -4,15 +4,12 @@ import FavoriteButton from './FavoriteButton';
 import ReviewButton from '../Reviews/ReviewButton';
 import classes from './MovieModalMobile.module.scss';
 
-const MovieModalMobile = ({ movie, onCloseModal }) => {
+const MovieModalMobile = ({ movie, onCloseModal, className }) => {
   const imagePathMobile = 'https://image.tmdb.org/t/p/w185' + movie.image_path;
 
   return (
-    <Modal
-      onCloseModal={onCloseModal}
-      className={classes['mobile']}
-    >
-      <div className={classes['movie-modal']}>
+    <Modal onCloseModal={onCloseModal}>
+      <div className={`${className} ${classes['movie-modal']}`}>
         <img src={imagePathMobile} alt={movie.title} />
         <div className={classes['rate']}>
           <h1>{movie.vote}</h1>
