@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import classes from './SignupForm.module.css';
+import classes from './SignupForm.module.scss';
 
 const signupUserSchema = yup.object().shape({
   username: yup.string().required(),
@@ -40,51 +40,44 @@ const SignupForm = ({ setIsLoginMode }) => {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      <form
-        className={classes['signup-form']}
-        onSubmit={handleSubmit(signupHandler)}
-      >
+    <div className={classes['signup-form']}>
+      <h2>
+        <span>S</span>ignup
+      </h2>
+      <form onSubmit={handleSubmit(signupHandler)}>
         <input
           type="text"
           name="username"
           placeholder="Username"
-          className={classes['signup-input']}
           {...register('username')}
         />
-        <p className={classes['signup-error']}>{errors.username?.message}</p>
+        <small>{errors.username?.message}</small>
         <input
           type="email"
           name="email"
           placeholder="Email"
-          className={classes['signup-input']}
           {...register('email')}
         />
-        <p className={classes['signup-error']}>{errors.email?.message}</p>
+        <small>{errors.email?.message}</small>
         <input
           type="password"
           name="password"
           placeholder="Password"
-          className={classes['signup-input']}
           {...register('password')}
         />
-        <p className={classes['signup-error']}>{errors.password?.message}</p>
+        <small>{errors.password?.message}</small>
         <input
           type="password"
           name="confirmPassword"
           placeholder="Confirm password"
-          className={classes['signup-input']}
           {...register('confirmPassword')}
         />
         {errors.confirmPassword?.message && (
-          <p className={classes['signup-error']}>
-            confirm password must be the same as password above
-          </p>
+          <small>confirm password must be the same as password above</small>
         )}
         <button>Sign Up</button>
       </form>
-    </>
+    </div>
   );
 };
 

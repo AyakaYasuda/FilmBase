@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as api from '../../services/users-api';
 import { login } from '../../redux/usersSlice';
-import classes from './LoginForm.module.css';
+import classes from './LoginForm.module.scss';
 
 const loginUserSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -58,31 +58,28 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <h1>LOG IN</h1>
-      <form
-        className={classes['login-form']}
-        onSubmit={handleSubmit(loginHandler)}
-      >
+    <div className={classes['login-form']}>
+      <h2>
+        <span>L</span>ogin
+      </h2>
+      <form onSubmit={handleSubmit(loginHandler)}>
         <input
           type="email"
           name="email"
           placeholder="Email"
-          className={classes['login-input']}
           {...register('email')}
         />
-        <p className={classes['login-error']}>{errors.email?.message}</p>
+        <small>{errors.email?.message}</small>
         <input
           type="password"
           name="password"
           placeholder="Password"
-          className={classes['login-input']}
           {...register('password')}
         />
-        <p className={classes['login-error']}>{errors.password?.message}</p>
+        <small>{errors.password?.message}</small>
         <button>Log In</button>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,15 @@
+@import '../mixin.scss';
+
+.auth-container {
+  @include section-container;
+  padding-top: 0;
+}
+
+.msg {
+  cursor: pointer;
+  padding: 0.5rem 0;
+
+  span {
+    color: $secondary-color;
+  }
+}

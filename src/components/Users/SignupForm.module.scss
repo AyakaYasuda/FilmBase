@@ -1,0 +1,29 @@
+@import '../../mixin.scss';
+
+.signup-form {
+  @include flex-col-center;
+
+  form {
+    @include flex-col-start;
+    max-width: 18rem;
+  }
+
+  h2 {
+    color: $base-color;
+    margin-bottom: 1rem;
+  }
+
+  span {
+    @include accent-text;
+  }
+
+  small {
+    color: $accent-color;
+    text-align: left;
+  }
+
+  button {
+    margin: 1.5rem 0 0.5rem;
+    align-self: center;
+  }
+}

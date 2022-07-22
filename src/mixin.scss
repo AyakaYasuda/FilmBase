@@ -8,21 +8,25 @@ $base-color: #ffffff;
     @content;
   }
 }
+
 @mixin media-sm {
   @media screen and (min-width: 400px) {
     @content;
   }
 }
+
 @mixin media-md {
   @media screen and (min-width: 768px) {
     @content;
   }
 }
+
 @mixin media-lg {
   @media screen and (min-width: 1024px) {
     @content;
   }
 }
+
 @mixin media-xl {
   @media screen and (min-width: 1600px) {
     @content;
@@ -32,6 +36,15 @@ $base-color: #ffffff;
 @mixin max-width {
   max-width: 1440px;
   margin: 0 auto;
+}
+
+@mixin form-width {
+  width: 100%;
+  max-width: 80vw;
+
+  @include media-sm {
+    max-width: 18rem;
+  }
 }
 
 @mixin hover-effect {
@@ -45,6 +58,14 @@ $base-color: #ffffff;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@mixin flex-col-start {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 @mixin flex-center {
@@ -65,16 +86,47 @@ $base-color: #ffffff;
 
 @mixin section-container {
   margin: 0 auto;
-  max-width: 400px;
-  padding: 1rem;
-  height: auto;
+  max-width: 300px;
   width: calc(100% - 2rem);
+  padding: 2rem 0.5rem;
+  height: auto;
+  text-align: center;
+
+  @include media-sm {
+    padding: 2rem 1rem;
+    max-width: 400px;
+  }
+
+  @include media-md {
+    padding: 4rem;
+    max-width: 600px;
+  }
 }
 
 @mixin section-container-wide {
   margin: 0 auto;
-  max-width: 1200px;
-  padding: 1rem;
-  height: auto;
+  max-width: 300px;
   width: calc(100% - 2rem);
+  padding: 2rem 0.5rem;
+  height: auto;
+  text-align: center;
+
+  @include media-md {
+    padding: 4rem;
+  }
+
+  @include media-sm {
+    padding: 2rem 1rem;
+    max-width: 400px;
+  }
+
+  @include media-md {
+    padding: 4rem;
+    max-width: 1200px;
+  }
+}
+
+@mixin accent-text {
+  font-size: 2.25rem;
+  color: $primary-color;
 }
