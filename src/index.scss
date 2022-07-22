@@ -17,10 +17,13 @@ body {
 }
 
 main {
-  margin-top: 12rem;
+  margin-top: 10rem;
 
+  @include media-sm {
+    margin-top: 11rem;
+  }
   @include media-md {
-    margin-top: 8rem;
+    margin-top: 9rem;
   }
 }
 
@@ -127,10 +130,16 @@ li {
 
 a {
   text-decoration: none;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem; /* 16px */
+  text-align: center;
 
   @include media-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+  }
+
+  @include media-md {
     font-size: 1rem; /* 16px */
     line-height: 1.5rem; /* 24px */
   }

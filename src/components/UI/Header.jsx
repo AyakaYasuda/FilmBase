@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <div className={classes.wrapper}>
       <header className={classes.header}>
         <div className={classes['mobile-top']}>
           <div className={classes.flex}>
@@ -83,7 +83,7 @@ const Header = () => {
           </ul>
         )}
       </header>
-    </>
+    </div>
   );
 };
 
