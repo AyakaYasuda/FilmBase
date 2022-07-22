@@ -38,15 +38,6 @@ $base-color: #ffffff;
   margin: 0 auto;
 }
 
-@mixin form-width {
-  width: 100%;
-  max-width: 80vw;
-
-  @include media-sm {
-    max-width: 18rem;
-  }
-}
-
 @mixin hover-effect {
   transform: translateY(-0.25rem);
   transition-duration: 300ms;

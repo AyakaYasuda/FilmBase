@@ -2,10 +2,11 @@
 
 .login-form {
   @include flex-col-center;
+  max-width: 18rem;
+  margin: 0 auto;
 
   form {
     @include flex-col-start;
-    @include form-width;
   }
 
   h2 {

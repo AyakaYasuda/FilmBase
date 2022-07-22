@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import MovieModal from './MovieModal';
+import MovieModalMobile from './MovieModalMobile';
+import MovieModalDesktop from './MovieModalDesktop';
 import MovieItem from './MovieItem';
 import classes from './MoviesList.module.scss';
 
@@ -29,11 +30,20 @@ const MoviesList = ({ movies }) => {
 
   return (
     <>
-      {/* {modalIsShown && selectedMovie && (
-        <MovieModal movie={selectedMovie} onCloseModal={closeModalHandler} />
-      )} */}
+      {modalIsShown && selectedMovie && (
+        <>
+          <MovieModalMobile
+            movie={selectedMovie}
+            onCloseModal={closeModalHandler}
+          />
+          <MovieModalDesktop
+            movie={selectedMovie}
+            onCloseModal={closeModalHandler}
+          />
+        </>
+      )}
 
-      <div className={classes["movies-list"]}>
+      <div className={classes['movies-list']}>
         {movies.length !== 0 &&
           movies.map((movie) => (
             <MovieItem

@@ -5,8 +5,6 @@ const MovieItem = ({ onOpenModal, id, image, title, release_date }) => {
   const imagePathDesktop = 'https://image.tmdb.org/t/p/w185' + image;
   const imagePathMobile = 'https://image.tmdb.org/t/p/w92' + image;
 
-  console.log(imagePathMobile);
-
   return (
     <>
       <div

@@ -50,15 +50,21 @@ const FavoriteButton = ({ movieId }) => {
   }, [favoriteMoviesIdArr, movieId]);
 
   return isFavorite ? (
-    <FavoriteIcon
-      sx={{ color: '#ffe251', fontSize: 30 }}
-      onClick={unsetFavoriteHandler}
-    />
+    <>
+      <h2>liked</h2>
+      <FavoriteIcon
+        sx={{ color: '#ffe251', fontSize: 30 }}
+        onClick={unsetFavoriteHandler}
+      />
+    </>
   ) : (
-    <FavoriteBorderIcon
-      sx={{ color: '#ffe251', fontSize: 30 }}
-      onClick={setFavoriteHandler}
-    />
+    <>
+      <h2>like</h2>
+      <FavoriteBorderIcon
+        sx={{ color: '#ffe251', fontSize: 30 }}
+        onClick={setFavoriteHandler}
+      />
+    </>
   );
 };
 
