@@ -1,0 +1,13 @@
+@import '../../mixin.scss';
+
+.like-button {
+  @include flex-center;
+  margin: 0.5rem;
+  background-color: transparent;
+  backdrop-filter: none;
+
+  p {
+    padding-left: 0.5rem;
+    color: $accent-color;
+  }
+}

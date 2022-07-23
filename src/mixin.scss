@@ -67,6 +67,14 @@ $base-color: #ffffff;
   align-items: center;
 }
 
+@mixin flex-start {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 @mixin flex-between {
   text-align: center;
   display: flex;
