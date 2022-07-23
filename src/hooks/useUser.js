@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import * as api from '../services/users-api';
 
-const useFavoriteMovies = () => {
+const useUser = () => {
   const { uid, token } = useSelector((state) => state.users);
   const [favoriteMoviesIdArr, setFavoriteMoviesIdArr] = useState([]);
 
@@ -21,4 +21,4 @@ const useFavoriteMovies = () => {
   return { favoriteMoviesIdArr, user };
 };
 
-export default useFavoriteMovies;
+export default useUser;

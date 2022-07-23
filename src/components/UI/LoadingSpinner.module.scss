@@ -1,0 +1,7 @@
+@import '../../mixin.scss';
+
+.loading-container {
+  @include section-container;
+  @include flex-col-center;
+  margin: 10rem auto;
+}

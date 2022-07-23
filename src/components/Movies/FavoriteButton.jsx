@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useMutation, useQueryClient } from 'react-query';
 import * as api from '../../services/users-api';
-import useFavoriteMovies from '../../hooks/useFavoriteMovies';
+import useUser from '../../hooks/useUser';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import classes from './FavoriteButton.module.scss';
 
 const FavoriteButton = ({ movieId }) => {
   const { uid, token } = useSelector((state) => state.users);
-  const { favoriteMoviesIdArr } = useFavoriteMovies();
+  const { favoriteMoviesIdArr } = useUser();
   const [isFavorite, setIsFavorite] = useState();
   const queryClient = useQueryClient();
 
@@ -50,15 +51,18 @@ const FavoriteButton = ({ movieId }) => {
   }, [favoriteMoviesIdArr, movieId]);
 
   return isFavorite ? (
-    <FavoriteIcon
-      sx={{ color: '#ffe251', fontSize: 30 }}
+    <button
+      className={classes['favorite-button']}
       onClick={unsetFavoriteHandler}
-    />
+    >
+      <h6>liked</h6>
+      <FavoriteIcon sx={{ color: '#ffe251', fontSize: 24 }} />
+    </button>
   ) : (
-    <FavoriteBorderIcon
-      sx={{ color: '#ffe251', fontSize: 30 }}
-      onClick={setFavoriteHandler}
-    />
+    <button className={classes['favorite-button']} onClick={setFavoriteHandler}>
+      <h6>like</h6>
+      <FavoriteBorderIcon sx={{ color: '#ffe251', fontSize: 24 }} />
+    </button>
   );
 };
 

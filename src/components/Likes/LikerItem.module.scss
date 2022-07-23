@@ -1,0 +1,23 @@
+@import '../../mixin.scss';
+
+.liker-item {
+  @include flex-col-start;
+  padding: 0.5rem;
+  background-color: rgba(225, 226, 81, 0.2);
+  border-radius: 5px;
+  margin-bottom: 1rem;
+
+  p {
+    margin-bottom: 0.2rem;
+  }
+
+  .buttons {
+    @include flex-center;
+    align-self: flex-end;
+
+    button {
+      margin: 0 0.2rem;
+      background-color: rgba(225, 226, 81, 0.5);
+    }
+  }
+}

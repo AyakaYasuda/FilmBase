@@ -1,0 +1,83 @@
+@import '../../mixin.scss';
+
+.wrapper {
+  background-color: rgba(249, 250, 251, 0.1);
+  opacity: 0.8;
+  backdrop-filter: blur(16px);
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+}
+
+.header {
+  @include max-width;
+}
+
+.mobile-top {
+  .flex {
+    @include flex-between;
+  }
+
+  h4 {
+    text-align: left;
+  }
+
+  .name {
+    color: $secondary-color;
+  }
+
+  @include media-md {
+    display: none;
+  }
+}
+
+.desktop-top {
+  display: none;
+
+  @include media-md {
+    @include flex-between;
+
+    .flex {
+      @include flex-between;
+
+      h4 {
+        text-align: center;
+        margin-right: 1rem;
+      }
+
+      .name {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+.menu {
+  margin-top: 1rem;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  margin: 0 0.5rem;
+  padding: 0.5rem 0rem;
+  text-align: center;
+  color: #ffffff;
+
+  @include media-sm {
+    padding: 0.5rem;
+  }
+}
+
+.link:hover {
+  @include hover-effect;
+  border-bottom: 2px solid #ef697d;
+}
+
+.active {
+  border-bottom: 2px solid #ef697d;
+}

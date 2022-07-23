@@ -3,6 +3,8 @@ import { useQuery } from 'react-query';
 import * as api from '../services/movies-api';
 
 import MoviesList from '../components/Movies/MoviesList';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
+import classes from './PopularMovies.module.scss';
 
 const PopularMovies = () => {
   const {
@@ -17,22 +19,23 @@ const PopularMovies = () => {
   });
 
   if (isLoading || isFetching) {
-    return (
-      <div className="section-container">
-        <p>Loading...</p>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
+  // FIXME: error handling
   if (isError) {
     return (
-      <div className="section-container">
+      <div className={classes['popular-movies-container']}>
         <p>{error}</p>
       </div>
     );
   }
 
-  return movies && <MoviesList movies={movies} />;
+  return (
+    <div className={classes['popular-movies-container']}>
+      {movies && <MoviesList movies={movies} />}
+    </div>
+  );
 };
 
 export default PopularMovies;

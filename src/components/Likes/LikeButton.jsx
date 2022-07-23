@@ -3,7 +3,10 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import * as api from '../../services/likes-api';
 
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import LikersList from './LikersList';
+import classes from './LikeButton.module.scss';
 
 const LikeButton = ({ reviewId }) => {
   const { uid: userId, token } = useSelector((state) => state.users);
@@ -55,18 +58,24 @@ const LikeButton = ({ reviewId }) => {
 
   return (
     <div>
-      <button>
-        {isLiked ? (
-          <p onClick={removeLikeHandler} style={{ color: 'red' }}>
-            liked
-          </p>
-        ) : (
-          <p onClick={likeReviewHandler} style={{ color: 'red' }}>
-            like
-          </p>
-        )}
-      </button>
-      <p onClick={showLikesListHandler}>{likes.length}</p>
+      {isLiked ? (
+        <button className={classes['like-button']}>
+          <ThumbUpAltIcon
+            sx={{ color: '#ee697d', fontSize: 24 }}
+            onClick={removeLikeHandler}
+          />
+          <p onClick={showLikesListHandler}>{likes.length}</p>
+        </button>
+      ) : (
+        <button className={classes['like-button']}>
+          <ThumbUpOffAltIcon
+            sx={{ color: '#ee697d', fontSize: 24 }}
+            onClick={likeReviewHandler}
+          />
+          <p onClick={showLikesListHandler}>{likes.length}</p>
+        </button>
+      )}
+
       {isLikesListShown && (
         <LikersList setIsLikesListShown={setIsLikesListShown} likes={likes} />
       )}

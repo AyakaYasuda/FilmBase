@@ -1,0 +1,65 @@
+@import '../../mixin.scss';
+
+.movie-modal {
+  position: relative;
+
+  .rate {
+    @include flex-center;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 2rem;
+    left: -2rem;
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+    background-color: #ef697d;
+    opacity: 0.9;
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    border: none;
+
+    h1 {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .container {
+    @include flex-center;
+    align-items: flex-start;
+    padding: 2rem;
+
+    img {
+      border-radius: 10px;
+    }
+
+    .content {
+      @include flex-col-center;
+      padding: 1rem 2rem;
+
+      .title {
+        color: $primary-color;
+      }
+
+      .line-spacer {
+        display: block;
+        height: 1.5rem;
+        width: 100%;
+        border-bottom: 1px solid rgb(243 244 246);
+        margin-bottom: 1.5rem;
+      }
+
+      &-description {
+        @include flex-col-start;
+      }
+
+      .spacer {
+        height: 1rem;
+      }
+
+      .buttons {
+        @include flex-center;
+      }
+    }
+  }
+}

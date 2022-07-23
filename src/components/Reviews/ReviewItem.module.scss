@@ -1,0 +1,81 @@
+@import '../../mixin.scss';
+
+.review {
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  max-width: 90vw;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+  @include media-sm {
+    max-width: 800px;
+    width: 90vw;
+    top: 10vh;
+  }
+
+  @include media-md {
+    padding: 1.5rem 1.5rem 0.5rem;
+  }
+
+  h3 {
+    color: $primary-color;
+    text-align: center;
+
+    @include media-md {
+      text-align: start;
+    }
+  }
+
+  .container {
+    padding: 1rem 0.5rem;
+    margin: 0 auto;
+    min-height: 15vh;
+    width: 95%;
+    @include flex-col-center;
+
+    @include media-md {
+      @include flex-col-start;
+    }
+
+    .rating {
+      @include flex-col-center;
+      margin-bottom: 1rem;
+
+      @include media-md {
+        @include flex-center;
+      }
+
+      h6 {
+        margin-left: 0.5rem;
+      }
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    h5 {
+      align-self: flex-end;
+    }
+  }
+
+  .buttons {
+    @include media-md {
+      text-align: end;
+      padding: 0 0.5rem;
+    }
+
+    button {
+      margin: 0 0.2rem;
+    }
+  }
+
+  .like-button {
+    padding: 0.5rem 0;
+
+    @include media-md {
+      padding: 0;
+    }
+  }
+}

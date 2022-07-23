@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import * as api from '../services/reviews-api';
+
 import ReviewForm from '../components/Reviews/ReviewForm';
+import classes from './EditReview.module.scss';
 
 const EditReview = () => {
   const { rid: reviewId } = useParams();
@@ -16,13 +18,13 @@ const EditReview = () => {
   );
 
   return (
-    <div className="section-container">
+    <div className={classes['edit-review-container']}>
       <ReviewForm
         submitType="update"
         reviewId={reviewId}
         preloadedValues={{
-          rate: review.rate,
-          comment: review.comment,
+          rate: review?.rate,
+          comment: review?.comment,
         }}
       />
     </div>

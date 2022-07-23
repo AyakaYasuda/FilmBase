@@ -1,0 +1,33 @@
+@import '../mixin.scss';
+
+.auth-container {
+  @include section-container;
+  padding-top: 0;
+}
+
+.auto-login-msg {
+  @include section-container;
+
+  h5 {
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  span {
+    color: $secondary-color;
+    margin-top: 0.3rem;
+  }
+
+  button {
+    margin: 2rem 0;
+  }
+}
+
+.msg {
+  cursor: pointer;
+  padding: 0.5rem 0;
+
+  span {
+    color: $secondary-color;
+  }
+}

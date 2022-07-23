@@ -1,0 +1,30 @@
+@import '../../mixin.scss';
+
+.movie-modal-mobile {
+  display: block;
+
+  @include media-md {
+    display: none;
+  }
+}
+
+.movie-modal-desktop {
+  display: none;
+
+  @include media-md {
+    display: block;
+  }
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  column-gap: 0.5rem;
+  row-gap: 1rem;
+  justify-items: center;
+  align-items: center;
+
+  @include media-sm {
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  }
+}

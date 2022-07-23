@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import * as api from '../services/reviews-api';
 
 import ReviewItem from '../components/Reviews/ReviewItem';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
+import classes from './Reviews.module.scss';
 
 const Reviews = () => {
   const { token } = useSelector((state) => state.users);
@@ -18,15 +20,15 @@ const Reviews = () => {
   });
 
   if (isLoading || isFetching) {
-    return (
-      <div className="section-container">
-        <p>Loading...</p>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
+  //FIXME: error handling
 
   return (
-    <div className="section-container">
+    <div className={classes['reviews-container']}>
+      <h2>
+        <span>E</span>xplore <span>R</span>eviews
+      </h2>
       {reviews.length !== 0 &&
         reviews.map((review) => (
           <ReviewItem key={review.review_id} review={review} />

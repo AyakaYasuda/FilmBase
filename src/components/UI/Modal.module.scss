@@ -1,3 +1,5 @@
+@import '../../mixin.scss';
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -5,26 +7,26 @@
   width: 100%;
   height: 100vh;
   z-index: 20;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(13, 23, 55, 0.8);
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 15vh;
-  left: 10%;
-  width: 80%;
-  min-height: 42.5rem;
-  background-color: white;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  left: 0;
+  right: 0;
+  margin: auto;
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
-}
+  max-width: 90vw;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 
-@media (min-width: 768px) {
-  .modal {
-    width: 70rem;
-    left: calc(50% - 35rem);
+  @include media-sm {
+    max-width: 800px;
+    width: 90vw;
+    top: 10vh;
   }
 }
 
