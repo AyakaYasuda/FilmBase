@@ -36,7 +36,7 @@ const MyReviews = () => {
     return <LoadingSpinner />;
   }
 
-  if (!isError && myReviews.length === 0) {
+  if (myReviews.length === 0) {
     return <NoDataMessage>No reviews yet...</NoDataMessage>;
   }
 

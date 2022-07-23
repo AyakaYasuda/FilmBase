@@ -44,7 +44,7 @@ const FavoriteMovies = () => {
     return <LoadingSpinner />;
   }
 
-  if (!isError && movies.length === 0) {
+  if (movies.length === 0) {
     return <NoDataMessage>No favorite movies yet...</NoDataMessage>;
   }
 
@@ -57,12 +57,14 @@ const FavoriteMovies = () => {
           onClick={resetErrorHandler}
         />
       )}
-      <div
-        className={classes['favorite-movies-container']}
-        onClick={resetErrorHandler}
-      >
-        {movies && <MoviesList movies={movies} />}
-      </div>
+      {!isError && (
+        <div
+          className={classes['favorite-movies-container']}
+          onClick={resetErrorHandler}
+        >
+          {movies && <MoviesList movies={movies} />}
+        </div>
+      )}
     </>
   );
 };

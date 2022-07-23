@@ -31,7 +31,7 @@ const Reviews = () => {
     return <LoadingSpinner />;
   }
 
-  if (!isError && reviews.length === 0) {
+  if (reviews.length === 0) {
     return <NoDataMessage>No reviews yet...</NoDataMessage>;
   }
 
