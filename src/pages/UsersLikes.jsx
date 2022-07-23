@@ -7,6 +7,7 @@ import * as likeApi from '../services/likes-api';
 
 import ReviewItem from '../components/Reviews/ReviewItem';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import NoDataMessage from '../components/UI/NoDataMessage';
 import classes from './UsersLikes.module.scss';
 
 const UsersLikes = () => {
@@ -37,6 +38,10 @@ const UsersLikes = () => {
     return <LoadingSpinner />;
   }
   // FIXME: error handling
+
+  if (reviews.length === 0) {
+    return <NoDataMessage>No reviews yet...</NoDataMessage>;
+  }
 
   return (
     <div className={classes['users-likes-container']}>

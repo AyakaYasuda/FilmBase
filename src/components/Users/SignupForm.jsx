@@ -4,7 +4,9 @@ import * as api from '../../services/users-api';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import useError from '../../hooks/useError';
 
+import ErrorMessage from '../UI/ErrorMessage';
 import classes from './SignupForm.module.scss';
 
 const signupUserSchema = yup.object().shape({
@@ -15,6 +17,8 @@ const signupUserSchema = yup.object().shape({
 });
 
 const SignupForm = ({ setIsLoginMode }) => {
+  const { message, status, resetErrorHandler, setErrorHandler } = useError();
+
   const {
     register,
     handleSubmit,
@@ -26,6 +30,9 @@ const SignupForm = ({ setIsLoginMode }) => {
     onSuccess: (data) => {
       reset();
       setIsLoginMode(true);
+    },
+    onError: (err) => {
+      setErrorHandler(err.response.data.errors.message, err.response.status);
     },
   });
 
@@ -40,44 +47,53 @@ const SignupForm = ({ setIsLoginMode }) => {
   };
 
   return (
-    <div className={classes['signup-form']}>
-      <h2>
-        <span>S</span>ignup
-      </h2>
-      <form onSubmit={handleSubmit(signupHandler)}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          {...register('username')}
+    <>
+      {message && status && (
+        <ErrorMessage
+          message={message}
+          status={status}
+          onClick={resetErrorHandler}
         />
-        <small>{errors.username?.message}</small>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          {...register('email')}
-        />
-        <small>{errors.email?.message}</small>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          {...register('password')}
-        />
-        <small>{errors.password?.message}</small>
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm password"
-          {...register('confirmPassword')}
-        />
-        {errors.confirmPassword?.message && (
-          <small>confirm password must be the same as password above</small>
-        )}
-        <button>Sign Up</button>
-      </form>
-    </div>
+      )}
+      <div className={classes['signup-form']}>
+        <h2>
+          <span>S</span>ignup
+        </h2>
+        <form onSubmit={handleSubmit(signupHandler)}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            {...register('username')}
+          />
+          <small>{errors.username?.message}</small>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            {...register('email')}
+          />
+          <small>{errors.email?.message}</small>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            {...register('password')}
+          />
+          <small>{errors.password?.message}</small>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm password"
+            {...register('confirmPassword')}
+          />
+          {errors.confirmPassword?.message && (
+            <small>confirm password must be the same as password above</small>
+          )}
+          <button>Sign Up</button>
+        </form>
+      </div>
+    </>
   );
 };
 

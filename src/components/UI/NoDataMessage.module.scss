@@ -1,0 +1,6 @@
+@import '../../mixin.scss';
+
+.no-data {
+  @include section-container;
+  opacity: 0.8;
+}
