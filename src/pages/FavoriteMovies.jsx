@@ -7,6 +7,7 @@ import useUser from '../hooks/useUser';
 
 import MoviesList from '../components/Movies/MoviesList';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import NoDataMessage from '../components/UI/NoDataMessage';
 import classes from './FavoriteMovies.module.scss';
 
 const FavoriteMovies = () => {
@@ -45,6 +46,10 @@ const FavoriteMovies = () => {
         <p>{error.message}</p>
       </div>
     );
+  }
+
+  if (movies.length === 0) {
+    return <NoDataMessage>No favorite movies yet...</NoDataMessage>;
   }
 
   return (

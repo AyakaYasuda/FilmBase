@@ -7,6 +7,7 @@ import * as userApi from '../services/users-api';
 
 import ReviewItem from '../components/Reviews/ReviewItem';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import NoDataMessage from '../components/UI/NoDataMessage';
 import classes from './UsersReviews.module.scss';
 
 const UsersReviews = () => {
@@ -38,11 +39,16 @@ const UsersReviews = () => {
   }
   //FIXME: error handling
 
+  if (reviews.length === 0) {
+    return <NoDataMessage>No reviews yet...</NoDataMessage>;
+  }
+
   return (
     <div className={classes['users-reviews-container']}>
       {user && (
         <h2>
-          <span className={classes.name}>{user.name}</span>'s <span className={classes.accent}>R</span>
+          <span className={classes.name}>{user.name}</span>'s{' '}
+          <span className={classes.accent}>R</span>
           eviews
         </h2>
       )}

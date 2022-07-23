@@ -5,6 +5,7 @@ import * as api from '../services/reviews-api';
 
 import ReviewItem from '../components/Reviews/ReviewItem';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
+import NoDataMessage from '../components/UI/NoDataMessage';
 import classes from './Reviews.module.scss';
 
 const Reviews = () => {
@@ -23,6 +24,10 @@ const Reviews = () => {
     return <LoadingSpinner />;
   }
   //FIXME: error handling
+
+  if (reviews.length === 0) {
+    return <NoDataMessage>No reviews yet...</NoDataMessage>;
+  }
 
   return (
     <div className={classes['reviews-container']}>
