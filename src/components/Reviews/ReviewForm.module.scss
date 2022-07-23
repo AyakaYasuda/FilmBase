@@ -1,0 +1,45 @@
+@import '../../mixin.scss';
+
+.review-form {
+  @include flex-col-center;
+  max-width: 18rem;
+  margin: 0 auto;
+
+  form {
+    @include flex-col-start;
+  }
+
+  label {
+    color: $base-color;
+    font-weight: 400;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+
+    @include media-sm {
+      font-size: 1.25rem; /* 20px */
+      line-height: 1.75rem; /* 28px */
+    }
+  }
+
+  h2 {
+    color: $base-color;
+    margin-bottom: 1rem;
+  }
+
+  span {
+    @include accent-text;
+  }
+
+  small {
+    color: $accent-color;
+  }
+
+  .form-buttons {
+    @include flex-center;
+    align-self: center;
+    
+    button {
+      margin: 1.5rem 0.5rem 0.5rem;
+    }
+  }
+}

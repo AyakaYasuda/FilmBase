@@ -1,0 +1,5 @@
+@import '../mixin.scss';
+
+.edit-review-container {
+  @include section-container;
+}

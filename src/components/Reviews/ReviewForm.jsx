@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as api from '../../services/reviews-api';
 
-import classes from './ReviewForm.module.css';
+import classes from './ReviewForm.module.scss';
 
 const reviewSchema = yup.object().shape({
   rate: yup.number().required(),
@@ -71,44 +71,44 @@ const ReviewForm = ({ movieId, reviewId, preloadedValues, submitType }) => {
   }, [setValue, preloadedValues]);
 
   return (
-    <>
-      <h1>REVIEW</h1>
-      <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
-        <label className={classes['form-label']} htmlFor="rate">
+    <div className={classes['review-form']}>
+      <h2>
+        <span>R</span>ate & <span>R</span>eview
+      </h2>
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <label htmlFor="rate">
           Rate
         </label>
         <input
-          className={classes['form-input']}
           type="number"
           name="rate"
           id="rate"
           {...register('rate')}
           min="0"
-          max="5"
+          max="10"
           step="0.1"
         />
-        <p className={classes['form-error-message']}>{errors.rate?.message}</p>
+        <small>{errors.rate?.message}</small>
 
-        <label className={classes['form-label']} htmlFor="comment">
+        <label htmlFor="comment">
           Comment
         </label>
         <textarea
-          className={classes['form-input']}
           name="comment"
-          rows="5"
+          rows="10"
           id="comment"
           {...register('comment')}
         />
-        <p className={classes['form-error-message']}>
+        <small>
           {errors.comment?.message}
-        </p>
+        </small>
 
         <div className={classes['form-buttons']}>
-          <button type="submit">Save</button>
           <button onClick={clearFormHandler}>Cancel</button>
+          <button type="submit">Save</button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
