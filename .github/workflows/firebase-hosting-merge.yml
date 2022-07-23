@@ -31,10 +31,16 @@ jobs:
         run: yarn global add firebase-tools
       - name: Create .env file
         run: echo "${{ secrets.ENV_PROD }}" > .env
-      - name: Install dependencies
-        run: yarn --network-timeout 100000
-      - name: Build app
-        run: yarn generate
+      - name: Install npm packages
+        run: npm install
+      - name: Build page
+        run: npm run build
+        env:
+          CI: false
+      # - name: Install dependencies
+      #   run: yarn --network-timeout 100000
+      # - name: Build app
+      #   run: yarn generate
       - name: Deploy
         run: firebase deploy --project $FIREBASE_PROJECT_ID_PROD --token $FIREBASE_TOKEN
     env:
