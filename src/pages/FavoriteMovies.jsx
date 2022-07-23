@@ -4,7 +4,9 @@ import { useQuery } from 'react-query';
 import * as api from '../services/users-api';
 
 import useUser from '../hooks/useUser';
+import useError from '../hooks/useError';
 
+import ErrorMessage from '../components/UI/ErrorMessage';
 import MoviesList from '../components/Movies/MoviesList';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import NoDataMessage from '../components/UI/NoDataMessage';
@@ -13,12 +15,12 @@ import classes from './FavoriteMovies.module.scss';
 const FavoriteMovies = () => {
   const { uid, token } = useSelector((state) => state.users);
   const { favoriteMoviesIdArr } = useUser();
+  const { message, status, resetErrorHandler, setErrorHandler } = useError();
 
   const {
+    isError,
     isLoading,
     isFetching,
-    isError,
-    error,
     data: movies,
   } = useQuery(
     ['FAVORITE_MOVIES', uid, favoriteMoviesIdArr],
@@ -32,6 +34,9 @@ const FavoriteMovies = () => {
       retry: false,
       initialData: [],
       enabled: Boolean(favoriteMoviesIdArr?.length !== 0),
+      onError: (err) => {
+        setErrorHandler(err.response.data.errors.message, err.response.status);
+      },
     }
   );
 
@@ -39,23 +44,26 @@ const FavoriteMovies = () => {
     return <LoadingSpinner />;
   }
 
-  // FIXME: error handling
-  if (isError) {
-    return (
-      <div className={classes['favorite-movies-container']}>
-        <p>{error.message}</p>
-      </div>
-    );
-  }
-
-  if (movies.length === 0) {
+  if (!isError && movies.length === 0) {
     return <NoDataMessage>No favorite movies yet...</NoDataMessage>;
   }
 
   return (
-    <div className={classes['favorite-movies-container']}>
-      {movies && <MoviesList movies={movies} />}
-    </div>
+    <>
+      {message && status && (
+        <ErrorMessage
+          message={message}
+          status={status}
+          onClick={resetErrorHandler}
+        />
+      )}
+      <div
+        className={classes['favorite-movies-container']}
+        onClick={resetErrorHandler}
+      >
+        {movies && <MoviesList movies={movies} />}
+      </div>
+    </>
   );
 };
 

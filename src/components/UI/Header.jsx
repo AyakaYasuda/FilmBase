@@ -3,6 +3,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/usersSlice';
 import useUser from '../../hooks/useUser';
+import useError from '../../hooks/useError';
 
 import Logo from './Logo';
 import classes from './Header.module.scss';
@@ -12,6 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, uid } = useSelector((state) => state.users);
   const { user } = useUser();
+  const { resetErrorHandler } = useError();
 
   const logoutHandler = () => {
     localStorage.removeItem('userData');
@@ -20,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} onClick={resetErrorHandler}>
       <header className={classes.header}>
         <div className={classes['mobile-top']}>
           <div className={classes.flex}>
