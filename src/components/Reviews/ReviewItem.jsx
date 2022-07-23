@@ -4,6 +4,7 @@ import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 import * as movieApi from '../../services/movies-api';
 import * as reviewApi from '../../services/reviews-api';
+import useError from '../../hooks/useError';
 
 import { styled } from '@mui/material/styles';
 import LikeButton from '../Likes/LikeButton';
@@ -29,6 +30,8 @@ const ReviewItem = ({ review }) => {
   const { uid, token } = useSelector((state) => state.users);
   const movieId = review.movie_id;
   const queryClient = useQueryClient();
+  const { setErrorHandler } = useError();
+
 
   const { data: movie } = useQuery(
     ['REVIEW_MOVIE', movieId],
@@ -39,6 +42,9 @@ const ReviewItem = ({ review }) => {
   const deleteReviewMutation = useMutation(reviewApi.deleteReview, {
     onSuccess: () => {
       queryClient.invalidateQueries(['MY_REVIEWS', uid]);
+    },
+    onError: (err) => {
+      setErrorHandler(err.response.data.errors.message, err.response.status);
     },
   });
 
