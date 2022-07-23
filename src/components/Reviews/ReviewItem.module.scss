@@ -21,6 +21,10 @@
   h3 {
     color: $primary-color;
     text-align: center;
+
+    @include media-md {
+      text-align: start;
+    }
   }
 
   .container {

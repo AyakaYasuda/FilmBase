@@ -13,15 +13,15 @@ import classes from './ReviewItem.module.scss';
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
     color: '#ffe251',
-    fontSize: 30,
+    fontSize: 28,
   },
   '& .MuiRating-iconHover': {
     color: '#ffe251',
-    fontSize: 30,
+    fontSize: 28,
   },
   '& .MuiRating-iconEmpty': {
     color: '#ffe251',
-    fontSize: 30,
+    fontSize: 28,
   },
 });
 

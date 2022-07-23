@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import * as reviewApi from '../services/reviews-api';
 import * as userApi from '../services/users-api';
+
 import ReviewItem from '../components/Reviews/ReviewItem';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
+import classes from './UsersReviews.module.scss';
 
 const UsersReviews = () => {
   const { uid } = useParams();
@@ -31,16 +34,18 @@ const UsersReviews = () => {
   );
 
   if (isLoading || isFetching || userLoading || userFetching) {
-    return (
-      <div className="section-container">
-        <p>Loading...</p>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
+  //FIXME: error handling
 
   return (
-    <div className="section-container">
-      {user && <h1>{user.name}'s reviews</h1>}
+    <div className={classes['users-reviews-container']}>
+      {user && (
+        <h2>
+          <span className={classes.name}>{user.name}</span>'s <span className={classes.accent}>R</span>
+          eviews
+        </h2>
+      )}
       {reviews.length !== 0 &&
         reviews.map((review) => (
           <ReviewItem key={review.review_id} review={review} />

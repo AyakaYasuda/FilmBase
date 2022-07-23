@@ -1,0 +1,18 @@
+@import '../mixin.scss';
+
+.users-reviews-container {
+  @include section-container-wide;
+
+  h2 {
+    color: $base-color;
+    margin-bottom: 2rem;
+  }
+
+  .name {
+    color: $secondary-color;
+  }
+
+  .accent {
+    @include accent-text;
+  }
+}
