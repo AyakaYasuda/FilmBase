@@ -1,0 +1,16 @@
+@import '../../mixin.scss';
+
+.error {
+  background-color: rgba(238, 105, 125, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  margin: 0rem auto;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1rem;
+  max-width: 300px;
+  width: calc(100% - 2rem);
+
+  p {
+    color: $accent-color;
+  }
+}

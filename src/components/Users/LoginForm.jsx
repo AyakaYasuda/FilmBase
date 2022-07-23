@@ -7,6 +7,9 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as api from '../../services/users-api';
 import { login } from '../../redux/usersSlice';
+import useError from '../../hooks/useError';
+
+import ErrorMessage from '../UI/ErrorMessage';
 import classes from './LoginForm.module.scss';
 
 const loginUserSchema = yup.object().shape({
@@ -17,6 +20,7 @@ const loginUserSchema = yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { message, status, resetErrorHandler, setErrorHandler } = useError();
 
   const {
     register,
@@ -46,6 +50,9 @@ const LoginForm = () => {
       reset();
       navigate('/movies');
     },
+    onError: (err) => {
+      setErrorHandler(err.response.data, err.response.status);
+    },
   });
 
   const loginHandler = (data) => {
@@ -58,28 +65,37 @@ const LoginForm = () => {
   };
 
   return (
-    <div className={classes['login-form']}>
-      <h2>
-        <span>L</span>ogin
-      </h2>
-      <form onSubmit={handleSubmit(loginHandler)}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          {...register('email')}
+    <>
+      {message && status && (
+        <ErrorMessage
+          message={message}
+          status={status}
+          onClick={resetErrorHandler}
         />
-        <small>{errors.email?.message}</small>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          {...register('password')}
-        />
-        <small>{errors.password?.message}</small>
-        <button>Log In</button>
-      </form>
-    </div>
+      )}
+      <div className={classes['login-form']}>
+        <h2>
+          <span>L</span>ogin
+        </h2>
+        <form onSubmit={handleSubmit(loginHandler)}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            {...register('email')}
+          />
+          <small>{errors.email?.message}</small>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            {...register('password')}
+          />
+          <small>{errors.password?.message}</small>
+          <button>Log In</button>
+        </form>
+      </div>
+    </>
   );
 };
 

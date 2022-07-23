@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import useError from '../hooks/useError';
 
 import SignupForm from '../components/Users/SignupForm';
 import LoginForm from '../components/Users/LoginForm';
@@ -10,6 +11,7 @@ import classes from './Auth.module.scss';
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { isLoggedIn } = useSelector((state) => state.users);
+  const { resetErrorHandler } = useError();
 
   const switchToSignupModeHandler = () => {
     setIsLoginMode(false);
@@ -34,7 +36,7 @@ const Auth = () => {
   }
 
   return (
-    <div className={classes['auth-container']}>
+    <div className={classes['auth-container']} onClick={resetErrorHandler}>
       {isLoginMode ? (
         <>
           <LoginForm />
