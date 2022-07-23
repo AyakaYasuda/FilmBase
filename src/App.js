@@ -13,6 +13,7 @@ import EditReview from './pages/EditReview';
 import UsersReviews from './pages/UsersReviews';
 import UsersLikes from './pages/UsersLikes';
 import Header from './components/UI/Header';
+import Footer from './components/UI/Footer';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -145,6 +146,7 @@ const App = () => {
           <Route path="*" element={<Navigate to={'/auth'} />} />
         </Routes>
       </main>
+      <Footer />
     </BrowserRouter>
   );
 };
