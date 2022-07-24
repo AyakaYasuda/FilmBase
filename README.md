@@ -34,10 +34,10 @@ Understanding how React Query works was the most challenging thing at the beginn
 
 ### [kakeibo](https://kakeibo-a9b29.web.app/)
 
-Popular Movies
+Popular movies
 <img width="1440" alt="popular movies" src="https://user-images.githubusercontent.com/60804249/180625086-fe0d487e-3c45-4fa4-9067-cce57689aa15.png">
 
-Movie Detail
+Movie modal
 <img width="1440" alt="movie detail" src="https://user-images.githubusercontent.com/60804249/180630676-239ea7d9-91fd-4872-b48c-617f401f48ff.png">
 
 Reviews
