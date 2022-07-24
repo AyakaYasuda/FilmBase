@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Filmbase
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ** ABOUT **
 
-## Available Scripts
+This is a movie platform app where you can browse popular movies, save your favorite movies and share reviews with other users. The data is provided by The Movie Database API and it updates daily, so you can follow what's new in theaters right now.
 
-In the project directory, you can run:
+### The aim of this project
 
-### `npm start`
+I built this app to learn to store data in a relational database, and fetch/update the data with React Query on the client side. Knowing that React Query would be the best choice to manage server state in React apps, I decided to introduce it into my project instead of writing reducers and logic with thunks. That improved the app with less complex code, and also saved lots of time to handle errors and loading states. Caching is another feature that I first implemented on this project, which made it really fast to refetch the data.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Some of the challenges I faced through this project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Understanding how React Query works was the most challenging thing at the beginning. Reading the official document over and over again and searching for sample codes in GitHub was quite helpful to solve this problem. There is more yet to learn about various use-cases of React Query, so I'll keep on exploring this useful library!
 
-### `npm test`
+### The technologies I used for this app
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Frontend
+- React
+- React Query
+- Redux Toolkit
+- Sass
+- Firebase
+- GitHub Actions
 
-### `npm run build`
+#### [Backend](https://github.com/AyakaYasuda/filmbase-backend)
+- Node.js
+- Express
+- PostgreSQL
+- Passport
+- Heroku
+- GitHub Actions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ** Preview **
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### [kakeibo](https://kakeibo-a9b29.web.app/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Popular Movies
+<img width="1440" alt="popular movies" src="https://user-images.githubusercontent.com/60804249/180625086-fe0d487e-3c45-4fa4-9067-cce57689aa15.png">
 
-### `npm run eject`
+Reviews
+<img width="1440" alt="reviews" src="https://user-images.githubusercontent.com/60804249/180625088-37295456-ed65-47d8-b378-e73fe2c310c3.png">
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Users who liked the review
+<img width="1440" alt="users who liked" src="https://user-images.githubusercontent.com/60804249/180625089-1d4edf3e-3e1a-4b90-bb9f-d0aa66547be1.png">
