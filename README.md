@@ -22,7 +22,7 @@ Understanding how React Query works was the most challenging thing at the beginn
 - Firebase
 - GitHub Actions
 
-#### [Backend](https://github.com/AyakaYasuda/filmbase-backend)
+#### Backend 👉 <https://github.com/AyakaYasuda/filmbase-backend>
 - Node.js
 - Express
 - PostgreSQL
@@ -36,6 +36,9 @@ Understanding how React Query works was the most challenging thing at the beginn
 
 Popular Movies
 <img width="1440" alt="popular movies" src="https://user-images.githubusercontent.com/60804249/180625086-fe0d487e-3c45-4fa4-9067-cce57689aa15.png">
+
+Movie Detail
+<img width="1440" alt="movie detail" src="https://user-images.githubusercontent.com/60804249/180630676-239ea7d9-91fd-4872-b48c-617f401f48ff.png">
 
 Reviews
 <img width="1440" alt="reviews" src="https://user-images.githubusercontent.com/60804249/180625088-37295456-ed65-47d8-b378-e73fe2c310c3.png">
